@@ -14,6 +14,9 @@ poder dar con el paradero de la mascota.
 ## Objetivo
 Lograr crear un prototipo de BOT en la plataforma de Telegram el cúal agilice la búsqueda de una mascota extraviada. Logrando que una persona que haya perdido a su mascota pueda hacer una publicación rapida en el BOT, el cúal se encargue de enviar el aviso a la respectiva zona donde sucedio la perdida, logrando que la búsqueda de dicha mascota sea mas optima y eficaz en un corto tiempo.
 * Por medio de canales de Telegram enviar una alerta a los residentes de las zonas y "viralizar" la bisqueda.
+* Lograr que las personas se ayuden todos contra todos, como vecinos
+* Lograr que los duenos encuentren lo mas rapido posible a las mascotas
+* Evitar que las mascotas desaparecidas no regresen a su hogar
 
 
 ## Problematica
