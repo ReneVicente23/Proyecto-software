@@ -9,8 +9,13 @@ Integrantes del Equipo BOT
 BOT orientado a la búsqueda de mascotas perdidas 
 ## Introduccion
 El siguiente proyecto está orientado a al desarrollo de un BOT para la plataforma Telegram, con la finalidad de apoyar y facilitar la búsqueda de mascotas extraviadas en la ciudad de La Paz, Bolivia, dado que los medios tradicionales como ser afiches, publicaciones en redes sociales u otros toman mucho tiempo para ser efectivos o no llegan a un grupo que pueda ayudar de forma inmediata, es necesario un **BOT para apoyar la búsqueda de mascotas** en el cual se reciban los datos necesarios y una zona específica para que el BOT informe en un grupo respectivo a una zona y estos puedan apoyar en la búsqueda en la brevedad posible.
+Con el uso de la tecnologia se pretende difundir estos folletos y que su alcance sea mayor, es decir, que llegue a mas personas y de esta manera 
+poder dar con el paradero de la mascota.
 ## Objetivo
 Lograr crear un prototipo de BOT en la plataforma de Telegram el cúal agilice la búsqueda de una mascota extraviada. Logrando que una persona que haya perdido a su mascota pueda hacer una publicación rapida en el BOT, el cúal se encargue de enviar el aviso a la respectiva zona donde sucedio la perdida, logrando que la búsqueda de dicha mascota sea mas optima y eficaz en un corto tiempo.
+* Por medio de canales de Telegram enviar una alerta a los residentes de las zonas y "viralizar" la bisqueda.
+
+
 ## Problematica
 En la ciudad de La Paz se tiene un gran número de mascotas desaparecidas, aunque en el pasado se intentaron implementar aplicaciones para ayudar con la busqueda de mascotas perdidas, estas no fueron muy populares, los avisos llegaban a pocas personas y los medios tradicionales también presentan algunas falencias como:
 - Comunicación lenta. En el caso de los afiches, estos tardan mucho tiempo en llegar a un público objetivo de ayuda, en muchos casos la mascota ya no se encuentra en las cercanías cuando estos afiches llegan a la población
