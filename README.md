@@ -29,6 +29,15 @@ Las personas desconocen Apps para la búsqueda de mascotas, muchos proyecto con 
 
 Notificaciones de mascotas realmente lejanas a tu zona. En grupos de Facebook hay muchos grupos que te notifican la perdida de una mascota, pero muchas veces esa mascota se perdio en una zona que esta muy lejana a la tuya, por eso que ya muchas personas no ven los avisos porque piensan que es de otra zona lejana, por lo cual tener dividido por zonas y que te lleguen notificaciones de mascotas solo de tu zona será mas optimo y evitamos ver mascotas extraviadas de zonas alejada a su zona.
 
+
+Para muchas personas el instalar mas aplicaciones en su telefono, y que solo realicen una tarea puede llegar a ser tedioso, en muchas ocaciones
+los usuarios no quieren intalar mas aplicaciones por diversos factores, como  ser:
+* Falta de Espacio en el dispositivo
+* Dificultad al aprender el uso de otras aplicaciones
+* Aplicaciones muy confusas en su manejo
+* Incompatibilidad con ciertos dispositivos
+Por ello, si se implentara un BOT en una aplicacion de mensajeria como la de Telegram, estariamos abarcando a mas personas, a dia de hoy, la aplicacion de Telegram es muy utilizada y es de facil uso, con esto evitamos que el usuario batalle mas al aprender el uso de una nueva app, Los duenos de mascotas desaparecidas haran llegar a mas personas los afiches digitales de la perdida y los vecninos de las zonas estaran al tanto inmediatamente si una mascota desaparece
+
 ## Valor del proyecto
 - Tangible
 -- Reduce costos para la búsqueda, en el caso de afiches y otros.
