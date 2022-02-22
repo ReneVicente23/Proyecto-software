@@ -41,10 +41,14 @@ Por ello, si se implentara un BOT en una aplicacion de mensajeria como la de Tel
 ## Valor del proyecto
 - Tangible
 -- Reduce costos para la búsqueda, en el caso de afiches y otros.
+-- Se podria evitar el pedido de recompensas para regresar a las mascotas (existen personas que se aprovechan de las situacion)
 - Intangible
 -- Las personas tendrán una forma más sencilla y rápida de comunicar avisos de búsqueda para las mascotas.
 -- Se comunicará del caso en un radio menor de búsqueda, buscando un aporte mayor de otras personas.
 -- Acelerar la busqueda, el tener las zonas divididas por grupos ayudará eficazmente a la busqueda.
+-- Los vecinos de las zonas estaran informados constantemente si alguna masocota se llegara a extraviar
+-- Los vecinos se ayudaran entre ellos, reportando extravios y/o hallazgos
+-- El alcance es mayor, es decir, se podria compartir informacion con las diferentes zonas.
 ## Ejemplo de funcionamiento
 - U (Usuario): Hola
 - BOT: Hola en que puedo ayudarlo: 
