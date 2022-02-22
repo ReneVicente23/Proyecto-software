@@ -27,28 +27,28 @@ Las personas desconocen Apps para la búsqueda de mascotas, muchos proyecto con 
 opcion: 1) Publicar un aviso de mascota perdida. 2) Mascota encontrada. 3) Mostrar todos los avisos no completados
 
 Caso 1.  Publicar un aviso de mascota perdida
-BOT: Seleccione la zona donde su mascota se perdio: 1) zona sur. 2) Sopocachi. 3) Miraflores ...
-U: 1) zona sur
-BOT: Ingrese el nombre de la mascota
-U: Pancho
-BOT: Ingrese una descripcion de la mascota
-U: Perro mediano, color cafe con manchas negras en las orejas y patas, lleva un collar verde.....
-BOT: Ultimo lugar de contacto con la mascota
-U: Calle x al frente del cafe ejemplo
-BOT: Datos de contacto adicionales
-U: Telefono fijo ########## 
-BOT: Su aviso fue publicado con el codigo **aabbbccc** en los grupos de zona sur, calacoto, etc
-BOT en GRUPO ZONA SUR: se perdio **Pancho** en **Calle x al frente del cafe ejemplo**, cuenta con la descripcion: **Perro mediano, color cafe con manchas negras en las orejas y patas, lleva un collar verde.....**, si se tiene informacion contactar a: **Telefono fijo ##########** 
+-BOT: Seleccione la zona donde su mascota se perdio: 1) zona sur. 2) Sopocachi. 3) Miraflores ...
+-U: 1) zona sur
+-BOT: Ingrese el nombre de la mascota
+-U: Pancho
+-BOT: Ingrese una descripcion de la mascota
+-U: Perro mediano, color cafe con manchas negras en las orejas y patas, lleva un collar verde.....
+-BOT: Ultimo lugar de contacto con la mascota
+-U: Calle x al frente del cafe ejemplo
+-BOT: Datos de contacto adicionales
+-U: Telefono fijo ########## 
+-BOT: Su aviso fue publicado con el codigo **aabbbccc** en los grupos de zona sur, calacoto, etc
+-BOT en GRUPO ZONA SUR: se perdio **Pancho** en **Calle x al frente del cafe ejemplo**, cuenta con la descripcion: **Perro mediano, color cafe con manchas negras en las orejas y patas, lleva un collar verde.....**, si se tiene informacion contactar a: **Telefono fijo ##########** 
 
 Caso 2 Mascota encontrada
-BOT: Ingrese su codigo de aviso
-U: aabbbccc
-BOT: Desea marcar este aviso como encontrado: si/no
-U: si
-BOT en GRUPO ZONA SUR: se encontro a **Pancho**
+-BOT: Ingrese su codigo de aviso
+-U: aabbbccc
+-BOT: Desea marcar este aviso como encontrado: si/no
+-U: si
+-BOT en GRUPO ZONA SUR: se encontro a **Pancho**
 
 Caso 3 Mostrar todos los avisos no completados
-BOT: estos son los avisos que no fueron completados:
+-BOT: estos son los avisos que no fueron completados:
 1) Pancho, zona sur, Calle x al frente del cafe ejemplo, descripcion: Perro mediano, color cafe con manchas negras en las orejas y patas, lleva un collar verde.....,informacion contacto: Telefono fijo ##########
 2) ........
 3) ........ 
