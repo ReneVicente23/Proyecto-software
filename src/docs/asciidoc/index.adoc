@@ -1,0 +1,373 @@
+= {product} - Histórias de Usuario
+Universidad Católica Boliviana. <rene.vicente@ucb.edu.bo>
+1.0.0
+:product: BOT BUSQUEDA MASCOTAS PERDIDAS
+
+## Introducción
+El presento documente tendrá el detalle de todas las historías de usuario para la construcción de un BOT de busqueda de mascotas perdidas.
+
+Se ha establecido que la funcionalidad mínima para la implementación será:
+
+Para los usuarios:
+
+ 1. Los usuarios pueden registrar una o mas mascotas mediante el bot.
+ 2. Reportar una mascota registrada como perdida.
+ 3. Modificacion y baja de la informacion de la mascota.
+ 4. Regsitrarse en grupos de mensajeria de las zonas.
+ 5. Reportar avistamiento de las mascotas con una foto.
+ 6. Solicitar todos los reportes de mascotas perdidas
+
+Para el bot:
+
+ 1. Solicitar actualizacion de datos de una mascota registrada en un lapso largo de tiempo (6 meses).
+ 2. Enviar mensajes a un conjunto de grupos de telegram para informar acerca de un reporte de mascota extraviada.
+
+Para los sponsors (a valida):
+ 1. Enviar publicidad a una zona despues de un pago. 
+
+
+## Histórias de Usuario.
+
+### 100 - Regsitro de mascota.
+
+*Autor*: Rene Vicente
+
+*Fecha*: 07/03/2022
+
+*Prioridad*: ALTA
+
+#### Descripción
+Un `usuario` debe registrar a su `mascota(s)` por medio de la aplicación, para esto debe enviar el nombre de la mascota, su descripcion, datos de contacto y una foto de la mascota. Una vez enviado su registro este se almacenara junto a su id en telegram. 
+La descrpcion incluira los siguientes datos:
+ 
+ * Especie de la mascota.
+ * Raza de la mascota.
+ * Genero.
+ * Edad.
+ * Rasgos caracteristicos, como ser marcas, tatuaje de identificacion, etc.
+ * Cuidados especiales (no es un campo obligatorio), en caso de una enfermedad o lesion de la mascota a considerar.
+
+#### Escenarios
+1. Usuario sin ningun registro de mascota.
+2. Validacion de parametros.
+3. Usuario con uno o mas registros de mascotas.
+4. Usuario con mascota ya registrada.
+
+#### Casos de Prueba
+
+*100.1.1 Usuario sin ningun registro de mascota* 
+
+Descripción: Un usuario que no tenga ningun regsitro de mascotas, y haga una solicitud de registro, pasara automaticamente al formulario de registro de mascota y podra proceder a llenarlo.
+
+Pasos:
+
+ 1. Ingresar al BOT via Telegram y enviar el comando `/start`
+    - Datos: NINGUNO
+    - Resultado esperado: El BOT retorna un mensaje. "En que puedo ayudarlo:
+
+    1) Regsitro de mascota
+    2) Reportar mascota perdida
+    3) Modificar o Eliminar registro de mascota
+    4) Regsitro de grupos de zonas
+    5) Avsitamiento de mascota perdida
+    6) Todas las mascotas perdidas
+    "
+
+ 2. El `usuario` envía el comando `/registroMascota`
+    - Datos: comando `/registroMascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese nombre de la mascota"
+
+ 3. El `usuario` ingresa el nombre de la mascota
+    - Datos: ingresa el `nombre de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese la especie y raza de la mascota"
+
+ 4. El `usuario` ingresa la especie y raza de la mascota
+    - Datos: ingresa la `especie y raza de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese la edad de la mascota"
+
+ 5. El `usuario` ingresa la edad de la mascota
+    - Datos: ingresa la `edad de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese el genero de la mascota"
+
+ 6. El `usuario` ingresa el genero de la mascota
+    - Datos: ingresa el `genero de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Algun rasgo caracteristico de la mascota, este espacio puede estar vacio"
+
+ 7. El `usuario` ingresa rasgo caracteristico o blanco
+    - Datos: ingresa el `rasgo caracteristico` o deja el `espacio en blanco`
+    - Resultado esperado: El BOT retorna un mensaje. "Algun cuidado especial de la mascota, este espacio puede estar vacio"
+
+ 8. El `usuario` ingresa cuidado especial o blanco
+    - Datos: ingresa el `cuidado especial` o deja el `espacio en blanco`
+    - Resultado esperado: El BOT retorna un mensaje. "Algun dato de contacto adicional, este espacio puede estar vacio"
+
+ 9. El `usuario` ingresa contactos adicionales o blanco
+    - Datos: ingresa el `contactos adicionales` o deja el `espacio en blanco`
+    - Resultado esperado: El BOT retorna un mensaje. "Suba una foto de su mascota"
+
+ 10. El `usuario` envia una foto de su mascota
+    - Datos: envio de un `archivo de imagen`
+    - Resultado esperado: El BOT retorna un mensaje. "Regsitro completado"
+
+*100.1.2 Validacion de parametros* 
+
+Descripción: Un usuario al momento de llenar el registro de mascota ingresa parametros no permitidos, en cualquier parte del formulario estos seran rechazados.
+
+Pasos:
+
+ 1. El `usuario` coloca un espacio en blanco en un campo obligatorio
+    - Datos: Coloca `un espacion en blanco`
+    - Resultado: El BOT pide nuevamente el dato de campo obligatorio porque no puede ser espacios en blanco.
+ 2. El `usuario` coloca carácteres no convencionales como emojis.
+    - Datos: Coloca `😀`
+    - Resultado: El BOT le indica que no puede colocar caracteres especiales.
+
+*100.2.1 Usuario con uno o mas registros de mascotas* 
+
+Descripción: Un usuario que tenga algun regsitro de mascota, y haga una solicitud de registro, se le mostrara un resumen de los regsitros que tenga y luego pasara al formulario de registro de mascota y podra proceder a llenarlo.
+
+Pasos:
+
+ 1. Ingresar al BOT via Telegram y enviar el comando `/start`
+    - Datos: NINGUNO
+    - Resultado esperado: El BOT retorna un mensaje. "En que puedo ayudarlo:
+
+    1) Regsitro de mascota
+    2) Reportar mascota perdida
+    3) Modificar o Eliminar registro de mascota
+    4) Regsitro de grupos de zonas
+    5) Avsitamiento de mascota perdida
+    6) Todas las mascotas perdidas
+    "
+
+ 2. El `usuario` envía el comando `/registroMascota`
+    - Datos: comando `/registroMascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Tiene registrados a las siguientes mascotas:
+
+    1) Especie y raza: Perro, mestizo
+    Nombre: Señor Gato
+    2) Especie y raza: Gato, atigrado
+    Nombre: Joven Perro
+
+    Desea continuar con el registro si/no:
+    "
+
+ 3. El `usuario` ingresa el comando `/si`
+    - Datos: ingresa el comando `/si`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese el nombre de la mascota"
+
+ 4. El `usuario` ingresa el nombre de la mascota
+    - Datos: ingresa el `nombre de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese la especie y raza de la mascota"
+
+ 5. El `usuario` ingresa la especie y raza de la mascota
+    - Datos: ingresa la `especie y raza de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese la edad de la mascota"
+
+ 6. El `usuario` ingresa la edad de la mascota
+    - Datos: ingresa la `edad de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Ingrese el genero de la mascota"
+
+ 7. El `usuario` ingresa el genero de la mascota
+    - Datos: ingresa el `genero de la mascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Algun rasgo caracteristico de la mascota, este espacio puede estar vacio"
+
+ 8. El `usuario` ingresa rasgo caracteristico o blanco
+    - Datos: ingresa el `rasgo caracteristico` o deja el `espacio en blanco`
+    - Resultado esperado: El BOT retorna un mensaje. "Algun cuidado especial de la mascota, este espacio puede estar vacio"
+
+ 9. El `usuario` ingresa cuidado especial o blanco
+    - Datos: ingresa el `cuidado especial` o deja el `espacio en blanco`
+    - Resultado esperado: El BOT retorna un mensaje. "Algun dato de contacto adicional, este espacio puede estar vacio"
+
+ 10. El `usuario` ingresa contactos adicionales o blanco
+    - Datos: ingresa el `contactos adicionales` o deja el `espacio en blanco`
+    - Resultado esperado: El BOT retorna un mensaje. "Suba una foto de su mascota"
+
+ 11. El `usuario` envia una foto de su mascota
+    - Datos: envio de un `archivo de imagen`
+    - Resultado esperado: El BOT retorna un mensaje. "Regsitro completado"
+
+*100.2.2 Usuario con mascota ya registrada.* 
+
+Descripción: Un usuario que tenga algun regsitro de mascota, y haga una solicitud de registro, se le mostrara un resumen de los regsitros que tenga, al ya tener el regsitro cancela el `registro de mascota` y retornara a al index o inicio.
+
+Pasos:
+
+ 1. Ingresar al BOT via Telegram y enviar el comando `/start`
+    - Datos: NINGUNO
+    - Resultado esperado: El BOT retorna un mensaje. "En que puedo ayudarlo:
+
+    1) Regsitro de mascota
+    2) Reportar mascota perdida
+    3) Modificar o Eliminar registro de mascota
+    4) Regsitro de grupos de zonas
+    5) Avsitamiento de mascota perdida
+    6) Todas las mascotas perdidas
+    "
+
+ 2. El `usuario` envía el comando `/registroMascota`
+    - Datos: comando `/registroMascota`
+    - Resultado esperado: El BOT retorna un mensaje. "Tiene registrados a las siguientes mascotas:
+
+    1) Especie y raza: Perro, mestizo
+    Nombre: Señor Gato
+    2) Especie y raza: Gato, atigrado
+    Nombre: Joven Perro
+
+    Desea continuar con el registro si/no:
+    "
+
+ 3. El `usuario` ingresa el comando `/no`
+    - Datos: ingresa el comando `/no`
+    - Resultado esperado: El BOT retorna al inicio o index
+
+### 101 - Reportar una mascota registrada como perdida.
+
+*Autor*: Rene Vicente
+
+*Fecha*: 07/03/2022
+
+*Prioridad*: MUY ALTA
+
+#### Descripción
+
+Un `Usuario` debe poder solicitar que un registro de mascota en el sistema sea declarado como perdido, al momento de declarar la perdida el bot enviara mensajes a los grupos zonales cercanos.
+
+El diagrama de secuencias para la presente história es el siguiente:
+
+[plantuml, format="png", id="estados-mascota"]
+....
+@startuml
+
+[*] --> REGSITRADO
+REGSITRADO --> PERDIDA
+PERDIDA --> ENCONTRADA
+ENCONTRADA -> REGISTRADO
+
+@enduml
+....
+
+#### Escenarios
+1. Solicitud mascota perdida APROBADA.
+2. Solicitud mascota perdida RECHAZADA.
+3. No se tiene mascotas registradas.
+
+#### Casos de Prueba
+
+*101.1.1 Solicitud mascota perdida APROBADA* 
+Descripción: El `usuario` solicita que uno de sus regsitros de mascotas, sea publicado como mascota perdida.
+
+Pasos:
+
+1. Ingresar al BOT via Telegram y enviar el comando `/start`
+    - Datos: NINGUNO
+    - Resultado esperado: El BOT retorna un mensaje. "En que puedo ayudarlo:
+
+    1) Regsitro de mascota
+    2) Reportar mascota perdida
+    3) Modificar o Eliminar registro de mascota
+    4) Regsitro de grupos de zonas
+    5) Avsitamiento de mascota perdida
+    6) Todas las mascotas perdidas
+    "
+
+ 2. El `usuario` envía el comando `/reportarPerdido`
+    - Datos: comando `/reportarPerdido`
+    - Resultado esperado: El BOT retorna un mensaje. "Tiene registrados a las siguientes mascotas:
+
+    1) Especie y raza: Perro, mestizo
+    Nombre: Señor Gato
+    2) Especie y raza: Gato, atigrado
+    Nombre: Joven Perro
+
+    ingrese el numero de la mascota, si deja el espacio en blanco o ingresa un valor no listado se retornara a inicio:
+    "
+
+ 3. El `usuario` ingresa el comando `1`
+    - Datos: ingresa el comando `1`
+    - Resultado esperado: El BOT retorna un mensaje. "Seleccione la zona donde fue el ultimo contacto con la mascota
+    
+    * Sopocachi
+    * Miraflores
+    * Zona Sur
+    * ...
+    "
+
+ 4. El `usuario` selecciona `Sopocachi`
+    - Datos: seleccion `Sopocachi`
+    - Resultado esperado: El BOT retorna un mensaje. "Su reporte sera enviado a los siguientes grupos 
+    
+    * Sopocachi
+    * Miraflores
+    * San Pedro 
+    * ...
+    "
+
+ 5. El `BOT` Envia el registro de la mascota a los grupos cercanos
+    - Datos: NINGUNO
+    - Resultado esperado: El BOT retorna un mensaje en varios grupos. "Se perdio la mascota:
+    
+    * Nombre:
+    * Especie y raza:
+    * Edad:
+    * Genero:
+    * Rasgos caracteristicos:
+    * En: Sopocachi 
+    * Imagen: 
+    "
+
+*101.1.2 Solicitud mascota perdida RECHAZADA* 
+Descripción: El `usuario` solicita que uno de sus regsitros de mascotas, sea publicado como mascota perdida, este solo sera rechazado si la mascota ya esta regsitrada como perdida.
+
+Pasos:
+
+1. Ingresar al BOT via Telegram y enviar el comando `/start`
+    - Datos: NINGUNO
+    - Resultado esperado: El BOT retorna un mensaje. "En que puedo ayudarlo:
+
+    1) Regsitro de mascota
+    2) Reportar mascota perdida
+    3) Modificar o Eliminar registro de mascota
+    4) Regsitro de grupos de zonas
+    5) Avsitamiento de mascota perdida
+    6) Todas las mascotas perdidas
+    "
+
+ 2. El `usuario` envía el comando `/reportarPerdido`
+    - Datos: comando `/reportarPerdido`
+    - Resultado esperado: El BOT retorna un mensaje. "Tiene registrados a las siguientes mascotas:
+
+    1) Especie y raza: Perro, mestizo
+    Nombre: Señor Gato
+    2) Especie y raza: Gato, atigrado
+    Nombre: Joven Perro
+
+    ingrese el numero de la mascota, si deja el espacio en blanco o ingresa un valor no listado se retornara a inicio:
+    "
+
+ 3. El `usuario` ingresa el comando `1`
+    - Datos: ingresa el comando `1`
+    - Resultado esperado: El BOT retorna un mensaje. "Solicitud RECHAZADA
+    su mascota ya esta registrada como perdida", El bot regresa al inicio
+
+*101.2.1 No se tiene mascotas registradas.* 
+Descripción: El `usuario` solicita que uno de sus regsitros de mascotas, sea publicado como mascota perdida, si este no tiene niguna mascota registrada sera retornado al inicio.
+
+Pasos:
+
+1. Ingresar al BOT via Telegram y enviar el comando `/start`
+    - Datos: NINGUNO
+    - Resultado esperado: El BOT retorna un mensaje. "En que puedo ayudarlo:
+
+    1) Regsitro de mascota
+    2) Reportar mascota perdida
+    3) Modificar o Eliminar registro de mascota
+    4) Regsitro de grupos de zonas
+    5) Avsitamiento de mascota perdida
+    6) Todas las mascotas perdidas
+    "
+
+ 2. El `usuario` envía el comando `/reportarPerdido`
+    - Datos: comando `/reportarPerdido`
+    - Resultado esperado: El BOT retorna un mensaje. "No tiene ningun registro de mascotas, Para regsitrar mascotas ingrese el comando `/regsitrarMascota` en el inicio", El bot retorna al inicio
