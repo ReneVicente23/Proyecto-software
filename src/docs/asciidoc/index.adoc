@@ -373,7 +373,7 @@ Pasos:
     - Datos: comando `/reportarPerdido`
     - Resultado esperado: El BOT retorna un mensaje. "No tiene ningun registro de mascotas, Para regsitrar mascotas ingrese el comando `/regsitrarMascota` en el inicio", El bot retorna al inicio
 
-### 102 - Modificar o Eliminar registro de mascota.
+### 102 - Modificar y baja de la informacion de la mascota.
 
 *Autor*: Bernardo Duran
 
@@ -382,7 +382,23 @@ Pasos:
 *Prioridad*: ALTA
 
 #### Descripción
-Un `usuario` debe realizar la modificación o eliminar algun registro de información de su `mascota(s)` por medio de la aplicación, para esto , el usuario debe ingresar el id otorgado al registrar la mascota como perdida, para así continuar con los pasos. 
+Un `usuario` debe realizar la modificación del registro de perdida de la mascota a encontrada y asi el `Bot` haga la eliminación del registro de información de su `mascota(s)`, para esto , el usuario debe ingresar el id otorgado al registrar la mascota como perdida, para así continuar con los pasos. 
+
+El diagrama de secuencias para la presente história es el siguiente:
+
+[plantuml, format="png", id="estados_eliminacion"]
+....
+@startuml
+
+[*] --> SOLICITUD
+SOLICITUD -> COMPROBAR
+COMPROBAR -> APROBADO
+COMPROBAR -> RECHAZADO
+RECHAZADO --> [*]
+APROBADO --> [*]
+
+@enduml
+....
 
 #### Escenarios
 1. Validación de datos.
