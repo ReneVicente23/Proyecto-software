@@ -47,6 +47,39 @@ La descrpcion incluira los siguientes datos:
  * Rasgos caracteristicos (no es un campo obligatorio), como ser marcas, tatuaje de identificacion, etc.
  * Cuidados especiales (no es un campo obligatorio), en caso de una enfermedad o lesion de la mascota a considerar.
 
+ El diagrama de secuencias para la presente história es el siguiente:
+
+[plantuml, format="png", id="estados-mascota"]
+....
+@startuml
+
+actor Usuario
+boundary "BOT GUI" as GUI
+control "BOT Control" as SC
+entity BOT
+database BOTDB
+
+Usuario -> GUI : "/start"
+GUI -> Usuario : "opciones"
+Usuario -> GUI : "/registromascota"
+GUI -> SC : "Solicitud de regsitro mascotas"
+SC -> BOT : "validado mascotas regsitradas" 
+BOT -> BOTDB : "obtener mascotas"
+BOTDB -> BOT: "lista mascotas"
+BOT -> SC: "Lista mascotas"
+SC -> GUI: "Lista mascotas"
+Usuario -> GUI: "tiene las siguientes mascotas registradas, ¿continuar?"
+GUI -> SC: "OPCION SI"
+SC -> BOT: "validado SI"
+BOT -> SC: "Sol. nuevos datos"
+SC -> GUI: "Solicitar DATOS"
+Usuario -> GUI: "DATOS"
+GUI ->SC : "DATOS"
+SC -> BOT: "DATOS VALIDADOS"
+BOT -> BOTDB: "ALMACENAR DATOS"
+@enduml
+....
+
 #### Escenarios
 1. Usuario sin ningun registro de mascota.
 2. Validacion de parametros.
@@ -234,7 +267,7 @@ Pasos:
 
 Un `Usuario` debe poder solicitar que un registro de mascota en el sistema sea declarado como perdido, al momento de declarar la perdida el bot enviara mensajes a los grupos zonales cercanos.
 
-El diagrama de secuencias para la presente história es el siguiente:
+El diagrama de estados para la presente história es el siguiente:
 
 [plantuml, format="png", id="estados-mascota"]
 ....
@@ -388,8 +421,6 @@ El diagrama de secuencias para la presente história es el siguiente:
 [plantuml, format="png", id="secuencia_mod"]
 ....
 @startuml
-
-title "Messages - Sequence Diagram"
 
 actor Usuario
 boundary "BOT GUI" as GUI
