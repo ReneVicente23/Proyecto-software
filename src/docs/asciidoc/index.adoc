@@ -582,3 +582,72 @@ Pasos:
     5) Avsitamiento de mascota perdida
     6) Todas las mascotas perdidas
     "
+
+    ### 103 - Regsitrarse en grupos de mensajeria de las zonas
+
+*Autor*: Jose Pozo Silva
+
+*Fecha*: 03/10/2022
+
+*Prioridad*: ALTA
+
+#### Descripción
+
+
+Un `usuario` primeramente debera registrarse en la aplicacion `Telegram`, una vez ya creada la cuenta, debera buscar el grupo de la zona a la cual desea ingresar, una vez localize el grupo de la zona, debe precionar la opcion unirse, y en ese momento se le pedira que se registre con los siguientes datos:
+
+   *  Nombre Completo
+   *  Edad
+   *  Numero de Celular
+   *  Correo Electronico
+   *  Direccion de Domicilio
+ 
+ 
+
+#### Escenarios
+1. Usuario no registrado en uu grupo de zonas.
+
+2. validadcion de Informacion.
+
+3. Usuario Registrado en mas de un grupo (zona)
+
+4. DOble Registro en una misma zona
+
+#### Casos de Prueba
+
+*103.1.1 Usuario no registrado en grupo de zonas*
+
+Descripcion: Un Usuario que no este registrado en un grupo y desee ingresar a un grupo de una zona en especifico, primeramente debera
+registrar sus datos personales
+
+pasos:
+
+1. Ingresar al bot de telegram y enviar el comando '/start'
+
+   - Datos: NINGUNO
+   - Resultado esperado: El bot enviara el siguiente mensaje. "Hola, Binevenido. Porfavor Seleccione una opcion
+
+      1) Regsitro de mascota
+      2) Reportar mascota perdida
+      3) Modificar o Eliminar registro de mascota
+      4) Regsitro de grupos de zonas
+      5) Avsitamiento de mascota perdida
+      6) Todas las mascotas perdidas
+   "
+
+2. El Usuario enviara el comando '/registroGrupo'
+   - Datos: comando "/registroGrupo"
+   - Resultado Esperado: El bot enviara el siguiente mensaje "Porfavor, Ingresa tu Nombre Completo"
+
+3. El Usuario escribe y envia su Nombre completo
+   -Datos: Ingrese tu nombre completo (nombre completo del usuario)
+   -Resultado Esperado: El bot retorna el siguiente mensjae "Ingresa tu edad"
+
+4. El usuario "ingresa y envia su edad"
+   -Datos: Ingresa tu edad (edad del usuario)
+   -Resultado: Esperado: EL bot retorna el siguiente mensaje "Ingresa tu numero de celular"
+
+
+
+
+   
