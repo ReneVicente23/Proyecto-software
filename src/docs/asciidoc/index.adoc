@@ -583,7 +583,7 @@ Pasos:
     6) Todas las mascotas perdidas
     "
 
-    ### 103 - Regsitrarse en grupos de mensajeria de las zonas
+    ### 104 - Regsitrarse en grupos de mensajeria de las zonas
 
 *Autor*: Jose Pozo Silva
 
@@ -615,7 +615,7 @@ Un `usuario` primeramente debera registrarse en la aplicacion `Telegram`, una ve
 
 #### Casos de Prueba
 
-*103.1.1 Usuario no registrado en grupo de zonas*
+*104.1.1 Usuario no registrado en grupo de zonas*
 
 Descripcion: Un Usuario que no este registrado en un grupo y desee ingresar a un grupo de una zona en especifico, primeramente debera
 registrar sus datos personales
