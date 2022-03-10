@@ -49,7 +49,7 @@ La descrpcion incluira los siguientes datos:
 
  El diagrama de secuencias para la presente história es el siguiente:
 
-[plantuml, format="png", id="estados-mascota"]
+[plantuml, format="png", id="secuencia-mascota-regsitro"]
 ....
 @startuml
 
@@ -270,6 +270,7 @@ Un `Usuario` debe poder solicitar que un registro de mascota en el sistema sea d
 El diagrama de estados para la presente história es el siguiente:
 
 [plantuml, format="png", id="estados-mascota"]
+
 ....
 @startuml
 
