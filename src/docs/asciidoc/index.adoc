@@ -597,6 +597,7 @@ Pasos:
 Un `usuario` primeramente debera registrarse en la aplicacion `Telegram`, una vez ya creada la cuenta, debera buscar el grupo de la zona a la cual desea ingresar, una vez localize el grupo de la zona, debe precionar la opcion unirse, y en ese momento se le pedira que se registre con los siguientes datos:
 
    *  Nombre Completo
+   *  Numero de Documento de Identidad
    *  Edad
    *  Numero de Celular
    *  Correo Electronico
@@ -611,7 +612,8 @@ Un `usuario` primeramente debera registrarse en la aplicacion `Telegram`, una ve
 
 3. Usuario Registrado en mas de un grupo (zona)
 
-4. DOble Registro en una misma zona
+4. Registro no completado y/o finalizado
+
 
 #### Casos de Prueba
 
@@ -633,21 +635,156 @@ pasos:
       4) Regsitro de grupos de zonas
       5) Avsitamiento de mascota perdida
       6) Todas las mascotas perdidas
+      
    "
 
 2. El Usuario enviara el comando '/registroGrupo'
-   - Datos: comando "/registroGrupo"
-   - Resultado Esperado: El bot enviara el siguiente mensaje "Porfavor, Ingresa tu Nombre Completo"
+   -  Datos: comando "/registroGrupo"
+   -  Resultado Esperado: El bot enviara el siguiente mensaje "Porfavor, Ingresa tu Numero de Documento de Identidad"
 
-3. El Usuario escribe y envia su Nombre completo
-   -Datos: Ingrese tu nombre completo (nombre completo del usuario)
-   -Resultado Esperado: El bot retorna el siguiente mensjae "Ingresa tu edad"
+3. El Usuario Ingresa su numero de documento de identidad
+   -  Datos: Ingresa tu numero de documento de identidad
+   -  Resultado esperado: El bot retornara el siguiente mensaje "Porfavor, ingresa tu nombre completo"
 
-4. El usuario "ingresa y envia su edad"
-   -Datos: Ingresa tu edad (edad del usuario)
-   -Resultado: Esperado: EL bot retorna el siguiente mensaje "Ingresa tu numero de celular"
+4. El Usuario ingresa y envia su Nombre completo
+   -  Datos: Ingrese tu nombre completo (nombre completo del usuario)
+   -  Resultado Esperado: El bot retorna el siguiente mensjae "Ingresa tu edad"
+
+5. El usuario ingresa y envia su edad
+   -  Datos: Ingresa tu edad (edad del usuario)
+   -  Resultado Esperado: EL bot retorna el siguiente mensaje "Ingresa tu numero de celular"
+
+6. El usuario ingresa y envia su numero de celular
+   -  Datos: Ingresa tu numero de celular
+   -  Resultado Esperado: El bot retorna el siguiente mensaje "Ingresa tu correo electronico"
+
+7. El usuario ingresa y envia su correo electronico
+   -  Datos: Ingresa tu correo electronico
+   -  Resultado Esperado: EL bot retornara el siguiente mensaje "Ingresa la direccion de tu Domicilio"
+
+8. El usario ingresa y envia su direccion de domicilio
+   -  Datos: Ingresa tu Direccion de Domicilio
+   -  Resultado Esperado: El bot retornara el siguiente mensaje "Selcciona una zona a la que quieres ingresar 
+         *  1. OBRAJES
+         *  2. SAN MIGUEL
+         *  3. CALACOTO
+         *  4. ACHUMANI
+         *  5. IRPAVI
+         *  6. LLOJETA
+         *  7. MIRAFLORES
+         *  8. SOPOCACHI
+         *  9. COTAHUMA 
+   "
+9. El usuario seleccionara y enviara una opcion con el comando '/"numero de lista"'
+   -  Datos: Seleccione una opcion de la lista de zonas.
+   -  Resultado esperado: El bot retornara el siguiente mensaje "Usted a seleccionado la zoma (---------), para acceder al grupo, haga 
+                                                               click en el siguiente enlace"
+
+10. El usuario entrara en el grupo seleccionado
+   -  Datos: Usuario registrado en el grupo de una zona seleccionada.
+   -  Resultado esperado: El bot retornara el siguiente mensaje "Bienvenido al grupo de mascotas desaparecidas de la zona (-------------)"
+
+*104.2.1 Validacion de parametros*
 
 
+Descripción: Un usuario al momento de llenar el registro de su usuario, ingresa parametros no permitidos, en cualquier parte del formulario estos seran rechazados.
+
+Casos:
+
+ 1. El `usuario` ingresa caracteres simbolos en los campos de texto
+
+    - Datos: El usuario ingresa simbolos y pretende enviarlos (a exepcion del simbolo (arroba"@" para el capo correo electronico))
+    - Resultado: El BOT retorna el mensaje "caracteres no permitidos, verifique e intente nuevamente"
+
+ 2. El `usuario` coloca carácteres no convencionales como emojis.
+    - Datos: Coloca `😀`
+    - Resultado: El BOT le indica que no puede colocar caracteres especiales.
+
+3. El usuario ingresa caracteres no permitidos para el dato solicitado
+   -  Datos: Ingresa caracteres diferentes a numeros en el campo edad
+   -  Resultado Esperado: El bor retornara el mensaje "Tipo de dato no permitido, verifique e intente nuevamente"
 
 
+*104.3.1 Usuario Registrado en mas de un grupo (zona)*
+
+Descripcion: Un usuario que ya este registrado, e intenra entrar a un grupo de zona adicional, se lo reconocera por el numero de documento de
+identidad, y se le enviara a la ultima opcion de registro para seleccionar una zona
+
+pasos:
    
+   1. Ingresar al bot de telegram y enviar el comando '/start'
+
+   - Datos: NINGUNO
+   - Resultado esperado: El bot enviara el siguiente mensaje. "Hola, Binevenido. Porfavor Seleccione una opcion
+
+      1) Regsitro de mascota
+      2) Reportar mascota perdida
+      3) Modificar o Eliminar registro de mascota
+      4) Regsitro de grupos de zonas
+      5) Avsitamiento de mascota perdida
+      6) Todas las mascotas perdidas
+   "
+
+2. El Usuario enviara el comando '/registroGrupo'
+   -  Datos: comando "/registroGrupo"
+   -  Resultado Esperado: El bot enviara el siguiente mensaje "Porfavor, Ingresa tu Numero de Documento de Identidad"
+
+3. El Usuario Ingresa su numero de documento de identidad
+   -  Datos: Ingresa tu numero de documento de identidad
+   -  Resultado Esperado: El bot retornara el siguiente mensaje "Usuario ya registrado en la base de datos, desea unirse a otro grupo
+                                                                 de otra zona    1. Si    2. NO "
+
+4. El Usuario Selecciona una opcion, en caso de ser (SI), se le enviara a escoger una zona.
+   -  Dato: Respuesta de Usuario (SI)
+   -  Resultado Esperado: El bot retornara el siguiente mensaje "Selcciona una zona a la que quieres ingresar 
+         *  1. OBRAJES
+         *  2. SAN MIGUEL
+         *  3. CALACOTO
+         *  4. ACHUMANI
+         *  5. IRPAVI
+         *  6. LLOJETA
+         *  7. MIRAFLORES
+         *  8. SOPOCACHI
+         *  9. COTAHUMA 
+   "
+5. El usuario seleccionara y enviara una opcion con el comando '/"numero de lista"'
+   -  Datos: Seleccione una opcion de la lista de zonas.
+   -  Resultado esperado: El bot retornara el siguiente mensaje "Usted a seleccionado la zoma (---------), para acceder al grupo, haga 
+                                                               click en el siguiente enlace (----------------link)"
+
+6 El usuario entrara en el grupo seleccionado
+   -  Datos: Usuario registrado en el grupo de una zona seleccionada.
+   -  Resultado esperado: El bot retornara el siguiente mensaje "Bienvenido al grupo de mascotas desaparecidas de la zona (-------------)"
+   
+*104.4.1. Registro no completado y/o finalizado*
+
+Descripcion: Si el usuario, al momento de registrar sus datos, no finaliza en un intervalo de tiempo definido, o si decide abandonar el 
+registro, el bot, redireccionara al menu principal.
+
+casos:
+
+1. Ingresar al bot de telegram y enviar el comando '/start'
+
+   - Datos: NINGUNO
+   - Resultado esperado: El bot enviara el siguiente mensaje. "Hola, Binevenido. Porfavor Seleccione una opcion
+
+      1) Regsitro de mascota
+      2) Reportar mascota perdida
+      3) Modificar o Eliminar registro de mascota
+      4) Regsitro de grupos de zonas
+      5) Avsitamiento de mascota perdida
+      6) Todas las mascotas perdidas
+      
+   "
+
+2. El Usuario enviara el comando '/registroGrupo'
+   -  Datos: comando "/registroGrupo"
+   -  Resultado Esperado: El bot enviara el siguiente mensaje "Porfavor, Ingresa tu Numero de Documento de Identidad"
+
+3. El Usuario Ingresa su numero de documento de identidad
+   -  Datos: Ingresa tu numero de documento de identidad
+   -  Resultado esperado: El bot retornara el siguiente mensaje "Porfavor, ingresa tu nombre completo"
+
+4. El usuario no responde en 5 minutos.
+   -  Datos: Sin respuesta
+   -  Resultado Esperado: El bot retornara el siguiente mensaje "Tiempo de respusta superado, Registro cancelado "
