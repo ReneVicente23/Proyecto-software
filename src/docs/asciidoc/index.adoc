@@ -388,6 +388,9 @@ Un `usuario` debe realizar la modificación o eliminar algun registro de informa
 1. Validación de datos.
 2. Ingreso de datos erroneos o falsos.
 3. Usuario con un registro de mascota.
+4. Solicitud de mascota ha eliminar APROBADA.
+5. Solicitud de mascota ha eliminar RECHAZADA.
+6. No se tiene mascotas registradas.
 
 #### Casos de Prueba
 
@@ -431,7 +434,7 @@ Pasos:
     - nombre de la mascota: Coloca `Draco (Y era el nombre: Bruno)`
     - Resultado: El BOT le indica que no se registro ninguna con dicho id y/o nombre.
 
-*102.1.3 Usuario con un registro de mascota*
+*102.2.1 Usuario con un registro de mascota*
 
 Descripción: Un usuario al momento que haga una solicitud de modificación y ingrese datos que se piden correctamente se le mostrará un menú donde debe seleccionar si desea modificar la información de la mascota y así eliminar la información.
 
@@ -447,38 +450,7 @@ Pasos:
     - Datos: mensaje `Si`
     - Resultado esperado: El BOT retorna un mensaje. "Que bueno!!! Se hizo la eliminación de la información de su mascota encontrada"
 
-### 103 - Eliminación de información.
-
-*Autor*: Bernardo Duran
-
-*Fecha*: 08/03/2022
-
-*Prioridad*: MUY ALTA
-
-#### Descripción
-
-Un `Usuario` al momento de confirmar la eliminacón de la información de su mascota el bot enviara mensajes a los grupos zonales cercanos.
-
-El diagrama de secuencias para la presente história es el siguiente:
-
-[plantuml, format="png", id="estados-mascota"]
-....
-@startuml
-
-[*] --> MODIFICACIÓN
-PERDIDA --> ENCONTRADA
-
-@enduml
-....
-
-#### Escenarios
-1. Solicitud mascota encontrada APROBADA.
-2. Solicitud mascota encontrada RECHAZADA.
-3. No se tiene mascotas registradas.
-
-#### Casos de Prueba
-
-*103.1.1 Solicitud mascota encontrada APROBADA* 
+*102.3.1 Solicitud mascota encontrada APROBADA* 
 Descripción: El `usuario` ingresa datos correctos de su mascota confirma que se encontró la mascota.
 
 Pasos:
@@ -507,7 +479,7 @@ Pasos:
     - Datos: mensaje `Si`
     - Resultado esperado: El BOT retorna un mensaje. "Que bueno!!! Se hizo la eliminación de la información de su mascota encontrada"
 
-*103.1.2 Solicitud mascota perdida RECHAZADA* 
+*102.3.2 Solicitud mascota perdida RECHAZADA* 
 Descripción: El `usuario` solicita que uno de sus regsitros de mascotas, sea publicado como mascota perdida, este solo sera rechazado si la mascota ya esta regsitrada como perdida.
 
 Pasos:
@@ -547,7 +519,7 @@ Pasos:
     6) Todas las mascotas perdidas
     "
 
-*103.2.1 No se tiene mascotas registradas.* 
+*102.4.1 No se tiene mascotas registradas.* 
 Descripción: El `usuario` solicita que uno de sus regsitros de mascotas, sea publicado como mascota perdida, si este no tiene niguna mascota registrada sera retornado al inicio.
 
 Pasos:
@@ -583,7 +555,7 @@ Pasos:
     6) Todas las mascotas perdidas
     "
 
-    ### 104 - Regsitrarse en grupos de mensajeria de las zonas
+### 103 - Regsitrarse en grupos de mensajeria de las zonas
 
 *Autor*: Jose Pozo Silva
 
@@ -617,7 +589,7 @@ Un `usuario` primeramente debera registrarse en la aplicacion `Telegram`, una ve
 
 #### Casos de Prueba
 
-*104.1.1 Usuario no registrado en grupo de zonas*
+*103.1.1 Usuario no registrado en grupo de zonas*
 
 Descripcion: Un Usuario que no este registrado en un grupo y desee ingresar a un grupo de una zona en especifico, primeramente debera
 registrar sus datos personales
@@ -684,7 +656,7 @@ pasos:
    -  Datos: Usuario registrado en el grupo de una zona seleccionada.
    -  Resultado esperado: El bot retornara el siguiente mensaje "Bienvenido al grupo de mascotas desaparecidas de la zona (-------------)"
 
-*104.2.1 Validacion de parametros*
+*103.2.1 Validacion de parametros*
 
 
 Descripción: Un usuario al momento de llenar el registro de su usuario, ingresa parametros no permitidos, en cualquier parte del formulario estos seran rechazados.
@@ -705,7 +677,7 @@ Casos:
    -  Resultado Esperado: El bor retornara el mensaje "Tipo de dato no permitido, verifique e intente nuevamente"
 
 
-*104.3.1 Usuario Registrado en mas de un grupo (zona)*
+*103.3.1 Usuario Registrado en mas de un grupo (zona)*
 
 Descripcion: Un usuario que ya este registrado, e intenra entrar a un grupo de zona adicional, se lo reconocera por el numero de documento de
 identidad, y se le enviara a la ultima opcion de registro para seleccionar una zona
@@ -756,7 +728,7 @@ pasos:
    -  Datos: Usuario registrado en el grupo de una zona seleccionada.
    -  Resultado esperado: El bot retornara el siguiente mensaje "Bienvenido al grupo de mascotas desaparecidas de la zona (-------------)"
    
-*104.4.1. Registro no completado y/o finalizado*
+*103.4.1. Registro no completado y/o finalizado*
 
 Descripcion: Si el usuario, al momento de registrar sus datos, no finaliza en un intervalo de tiempo definido, o si decide abandonar el 
 registro, el bot, redireccionara al menu principal.
