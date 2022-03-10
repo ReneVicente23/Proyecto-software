@@ -1,6 +1,5 @@
 = {product} - Histórias de Usuario
-Universidad Católica Boliviana. <rene.vicente@ucb.edu.bo - bernardo.duran@ucb.edu.bo - jose.pozo@ucb.edu.bo>
-
+Universidad Católica Boliviana. <rene.vicente@ucb.edu.bo  bernardo.duran@ucb.edu.bo  jose.pozo@ucb.edu.bo>
 1.0.0
 :product: BOT BUSQUEDA MASCOTAS PERDIDAS
 
@@ -23,7 +22,7 @@ Para el bot:
  1. Solicitar actualizacion de datos de una mascota registrada en un lapso largo de tiempo (6 meses).
  2. Enviar mensajes a un conjunto de grupos de telegram para informar acerca de un reporte de mascota extraviada.
 
-Para los sponsors (a valida):
+Para los sponsors (a validar):
  1. Enviar publicidad a una zona despues de un pago. 
 
 
@@ -45,7 +44,7 @@ La descrpcion incluira los siguientes datos:
  * Raza de la mascota.
  * Genero.
  * Edad.
- * Rasgos caracteristicos, como ser marcas, tatuaje de identificacion, etc.
+ * Rasgos caracteristicos (no es un campo obligatorio), como ser marcas, tatuaje de identificacion, etc.
  * Cuidados especiales (no es un campo obligatorio), en caso de una enfermedad o lesion de la mascota a considerar.
 
 #### Escenarios
@@ -94,15 +93,15 @@ Pasos:
     - Datos: ingresa el `genero de la mascota`
     - Resultado esperado: El BOT retorna un mensaje. "Algun rasgo caracteristico de la mascota, este espacio puede estar vacio"
 
- 7. El `usuario` ingresa rasgo caracteristico o blanco
+ 7. El `usuario` ingresa rasgo caracteristico o deja espacio en blanco
     - Datos: ingresa el `rasgo caracteristico` o deja el `espacio en blanco`
     - Resultado esperado: El BOT retorna un mensaje. "Algun cuidado especial de la mascota, este espacio puede estar vacio"
 
- 8. El `usuario` ingresa cuidado especial o blanco
+ 8. El `usuario` ingresa cuidado especial o deja espacio en blanco
     - Datos: ingresa el `cuidado especial` o deja el `espacio en blanco`
     - Resultado esperado: El BOT retorna un mensaje. "Algun dato de contacto adicional, este espacio puede estar vacio"
 
- 9. El `usuario` ingresa contactos adicionales o blanco
+ 9. El `usuario` ingresa contactos adicionales o deja espacio en blanco
     - Datos: ingresa el `contactos adicionales` o deja el `espacio en blanco`
     - Resultado esperado: El BOT retorna un mensaje. "Suba una foto de su mascota"
 
@@ -241,10 +240,10 @@ El diagrama de secuencias para la presente história es el siguiente:
 ....
 @startuml
 
-[*] --> REGSITRADO
-REGSITRADO --> PERDIDA
+[*] --> REGISTRADO
+REGISTRADO --> PERDIDA
 PERDIDA --> ENCONTRADA
-ENCONTRADA -> REGISTRADO
+ENCONTRADA --> REGISTRADO
 
 @enduml
 ....
@@ -382,21 +381,40 @@ Pasos:
 *Prioridad*: ALTA
 
 #### Descripción
-Un `usuario` debe realizar la modificación del registro de perdida de la mascota a encontrada y asi el `Bot` haga la eliminación del registro de información de su `mascota(s)`, para esto , el usuario debe ingresar el id otorgado al registrar la mascota como perdida, para así continuar con los pasos. 
+Un `usuario` debe poder realizar la modificación del registro de la mascota, como tambien dar de baja esta informacion, para que el `Bot` pueda hacer la eliminación o modificacion del registro de información de su `mascota(s)`, el usuario debe tener un registro de mascota, ingresar el id otorgado al listar su mascota, para así continuar con los pasos. 
 
 El diagrama de secuencias para la presente história es el siguiente:
 
-[plantuml, format="png", id="estados_eliminacion"]
+[plantuml, format="png", id="secuencia_mod"]
 ....
 @startuml
 
-[*] --> SOLICITUD
-SOLICITUD -> COMPROBAR
-COMPROBAR -> APROBADO
-COMPROBAR -> RECHAZADO
-RECHAZADO --> [*]
-APROBADO --> [*]
+title "Messages - Sequence Diagram"
 
+actor Usuario
+boundary "BOT GUI" as GUI
+control "BOT Control" as SC
+entity BOT
+database BOTDB
+
+Usuario -> GUI : "/start"
+GUI -> Usuario : "opciones"
+Usuario -> GUI : "/ModificaInfo"
+GUI -> SC : "Solicitud de mascotas"
+SC -> BOT : "validado obtener mascotas" 
+BOT -> BOTDB : "obtener mascotas"
+BOTDB -> BOT: "lista mascotas"
+BOT -> SC: "Lista mascotas"
+SC -> GUI: "Lista mascotas"
+Usuario -> GUI: "/1"
+GUI -> SC: "OPCION 1"
+SC -> BOT: "validado a modificar 1"
+BOT -> SC: "Sol. nuevos datos"
+SC -> GUI: "Datos validados a modificar"
+Usuario -> GUI: "DATOS"
+GUI ->SC : "DATOS"
+SC -> BOT: "DATOS VALIDADOS"
+BOT -> BOTDB: "ALMACENAR DATOS"
 @enduml
 ....
 
@@ -456,15 +474,15 @@ Descripción: Un usuario al momento que haga una solicitud de modificación y in
 
 Pasos:
 
-1. El `usuario` coloca un id y/o el nombre incorrecto.
+1. El `usuario` coloca un id y/o el nombre correcto.
     - id: Coloca `321`
     - nombre de la mascota: Coloca `Bruno`
     - Resultado esperado: El BOT retorna un mensaje. "Datos correctos y manda un mensaje de pregunta:"
 2. El bot muestra un mensaje.
-    - El BOT retorna un mensaje. "Usted encontró a su mascota(Se eliminará los datos de la misma si envía un Si)? (Si/No):
+    - El BOT retorna un mensaje. "Desea elminar o modificar a esta mascota: `Bruno` (Si/No):
 3. El `usuario` envía el mensaje con la palabra `Si`
     - Datos: mensaje `Si`
-    - Resultado esperado: El BOT retorna un mensaje. "Que bueno!!! Se hizo la eliminación de la información de su mascota encontrada"
+    - Resultado esperado: El BOT retorna un mensaje. "Complete el formulario por favor" El bot realiza la historia de usuario #100
 
 *102.3.1 Solicitud mascota encontrada APROBADA* 
 Descripción: El `usuario` ingresa datos correctos de su mascota confirma que se encontró la mascota.
@@ -519,7 +537,7 @@ Pasos:
     - nombre de la mascota: Coloca `Bruno`
     - Resultado esperado: El BOT retorna un mensaje. "Datos correctos y manda un mensaje de pregunta:"
  4. El bot muestra un mensaje.
-    - El BOT retorna un mensaje. "Usted encontró a su mascota(Se eliminará los datos de la misma si envía un Si)? (Si/No):
+    - El BOT retorna un mensaje. "Usted encontró a su mascota? (Si/No):
  5. El `usuario` envía el mensaje con la palabra `No`
     - Datos: mensaje `No`
     - Resultado esperado: El BOT retorna un mensaje y posterior envía nuevamente el menú. "Esperemos que aparezca pronto."
@@ -594,7 +612,7 @@ Un `usuario` primeramente debera registrarse en la aplicacion `Telegram`, una ve
  
 
 #### Escenarios
-1. Usuario no registrado en uu grupo de zonas.
+1. Usuario no registrado en un grupo de zonas.
 
 2. validadcion de Informacion.
 
