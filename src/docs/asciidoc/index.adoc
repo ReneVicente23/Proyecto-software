@@ -381,7 +381,7 @@ Pasos:
 *Prioridad*: ALTA
 
 #### Descripción
-Un `usuario` debe poder realizar la modificación del registro de la mascota, como tambien dar de baja esta informacion, para que el `Bot` pueda hacer la eliminación o modificacion del registro de información de su `mascota(s)`, el usuario debe tener un registro de mascota, ingresar el id otorgado al listar su mascota, para así continuar con los pasos. 
+Un `usuario` debe poder realizar la modificación del registro de la mascota, como tambien dar de baja esta informacion, para que el `Bot` pueda hacer la eliminación o modificacion del registro de información de su `mascota(s)`, el usuario debe tener un registro de mascota, ingresar el id otorgado al listar su mascota, para así continuar con el rellenado de formulario el cual es la historia de usaurio #100. 
 
 El diagrama de secuencias para la presente história es el siguiente:
 
