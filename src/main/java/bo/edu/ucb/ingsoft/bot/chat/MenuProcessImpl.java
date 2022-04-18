@@ -47,7 +47,7 @@ public class MenuProcessImpl extends AbstractProcess {
                 try {
                     int opcion = Integer.parseInt(text);
                     switch (opcion){
-                        case 1 : result = new QueryPastRequestsProcessImpl();
+                        case 1 : result = new QueryRegisterPetProcessImpl();
                         break;
                         case 2 : result = new RequestsPermissionProcessImpl();
                         break;
@@ -66,9 +66,13 @@ public class MenuProcessImpl extends AbstractProcess {
 
     private void showMainMenu(MascotaLongPullingBot bot, Long chatId) {
         StringBuffer sb = new StringBuffer();
-        sb.append("MENU PRINCIPAL - BOT RRHH\r\n");
-        sb.append("1. Consultar permisos solicitados\r\n");
-        sb.append("2. Solicitar vacación\r\n");
+        sb.append("MENU PRINCIPAL BOT BUSQUEDA DE MASCOTAS\r\n");
+        sb.append("1. Registrar mascota\r\n");
+        sb.append("2. Reportar mascota Perdida\r\n");
+        sb.append("3. Editar modificar mascota\r\n");
+        sb.append("4. Registrarse a grupos de la zona\r\n");
+        sb.append("5. Avistamiento de mascota perdida\r\n");
+        sb.append("6. Mostrar todas las mascotas perdidas\r\n");
         sb.append("Elija una opción:\r\n");
         sendStringBuffer(bot, chatId, sb);
 
