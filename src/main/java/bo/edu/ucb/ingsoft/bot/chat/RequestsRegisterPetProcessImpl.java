@@ -1,39 +1,31 @@
 package bo.edu.ucb.ingsoft.bot.chat;
 
+import bo.edu.ucb.ingsoft.bot.bl.PetListBl;
+import bo.edu.ucb.ingsoft.bot.dto.PetListDto;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import java.util.List;
 
-import java.util.HashMap;
-
-public class MenuProcessImpl extends AbstractProcess {
-
-    public MenuProcessImpl() {
-        this.setName("Menú principal");
-        this.setDefault(true);
+public class RequestsRegisterPetProcessImpl extends AbstractProcess{
+    public RequestsRegisterPetProcessImpl() {
+        this.setName("Agregar Nueva mascota");
+        this.setDefault(false);
         this.setExpires(false);
         this.setStartDate(System.currentTimeMillis()/1000);
-        this.setUserData(new HashMap<>());
+        //this.setUserData(new HashMap<>());
         this.setStatus("STARTED");
     }
 
-    // Retornar un Widget de tipo menu
-//    @Override
-//    public AbstractWidget onInit() {
-//        MenuWidgetImpl menuWidget = new MenuWidgetImpl(messages);
-//        return menuWidget;
-//    }
-
-
     @Override
     public AbstractProcess handle(Update update, MascotaLongPullingBot bot) {
-        AbstractProcess result = this; // sigo en el mismo proceso.
+        AbstractProcess result = this; // sigo en el mismo proceso. MOD
         Long chatId = update.getMessage().getChatId();
 
         if (this.getStatus().equals("STARTED")) {
 
-            showMainMenu(bot, chatId);
+            showPets(bot, chatId);
         } else if (this.getStatus().equals("AWAITING_USER_RESPONSE")) {
-            // Estamos esperando por un numero 1 o 2
+            // Estamos esperando por un 1 Si o 2 No
             Message message = update.getMessage();
             if ( message.hasText() ) {
                 // Intentamos transformar en número
@@ -41,33 +33,32 @@ public class MenuProcessImpl extends AbstractProcess {
                 try {
                     int opcion = Integer.parseInt(text);
                     switch (opcion){
-                        case 1 : result = new RequestsRegisterPetProcessImpl();
-                        break;
-                        case 2 : result = new RequestsPermissionProcessImpl();
-                        break;
-                        default: showMainMenu(bot, chatId);
+                        case 1 : result = new RequestsRegisterPetFromImpl();
+                            break;
+                        case 2 : result = new MenuProcessImpl();
+                            break;
+                        default: showPets(bot, chatId);
                     }
                 } catch (NumberFormatException ex) {
-                    showMainMenu(bot, chatId);
+                    showPets(bot, chatId);
                 }
                 // continuar con el proceso seleccionado
             } else { // Si me enviaron algo diferente de un texto.
-                showMainMenu(bot, chatId);
+                showPets(bot, chatId);
             }
         }
         return result;
     }
 
-    private void showMainMenu(MascotaLongPullingBot bot, Long chatId) {
+    private void showPets(MascotaLongPullingBot bot, Long chatId) {
+        PetListBl petListBl = new PetListBl();
+        List<PetListDto> petlist = petListBl.findPets(chatId);
         StringBuffer sb = new StringBuffer();
-        sb.append("MENU PRINCIPAL BOT BUSQUEDA DE MASCOTAS\r\n");
-        sb.append("1. Registrar mascota\r\n");
-        sb.append("2. Reportar mascota Perdida\r\n");
-        sb.append("3. Editar modificar mascota\r\n");
-        sb.append("4. Registrarse a grupos de la zona\r\n");
-        sb.append("5. Avistamiento de mascota perdida\r\n");
-        sb.append("6. Mostrar todas las mascotas perdidas\r\n");
-        sb.append("Elija una opción:\r\n");
+        sb.append("Tiene registradas las siguientes mascotas: \r\n" ).append(petlist.size());
+        for(PetListDto pets: petlist) {
+            sb.append(pets.toString()).append("\n\r");
+        }
+        sb.append("¿Desea Continuar? (1: Si/2: No)\r\n" );
         sendStringBuffer(bot, chatId, sb);
 
         String nombre = "Juan";
@@ -75,8 +66,6 @@ public class MenuProcessImpl extends AbstractProcess {
         String nombreCompleto = nombre + " " + apellido;
         this.setStatus("AWAITING_USER_RESPONSE");
     }
-
-
 
     @Override
     public AbstractProcess onError() {

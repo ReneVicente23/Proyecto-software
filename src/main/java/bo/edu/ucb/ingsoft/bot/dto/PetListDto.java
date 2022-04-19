@@ -87,15 +87,14 @@ public class PetListDto {
 
     @Override
     public String toString() {
-        return "PetListDto{" +
-                "PetName='" + PetName + '\'' +
-                ", PetTipe='" + PetTipe + '\'' +
-                ", PetAge='" + PetAge + '\'' +
-                ", PetGender='" + PetGender + '\'' +
-                ", PetStat='" + PetStat + '\'' +
-                ", PetCare='" + PetCare + '\'' +
-                ", PetContacts='" + PetContacts + '\'' +
-                ", PetImage='" + PetImage + '\'' +
-                '}';
+        return "Nombre de la mascota= '" + PetName + '\'' +
+                "\n Especie y raza= '" + PetTipe + '\'' +
+                "\n Edad de la mascota= '" + PetAge + '\'' +
+                "\n Genero= '" + PetGender + '\'' +
+                "\n Rasgos= '" + PetStat + '\'' +
+                "\n Cuidados= '" + PetCare + '\'' +
+                "\n Contactos= '" + PetContacts + '\'' +
+                "\n Imagen= '" + PetImage + '\''+
+                "\n ---------------------------------";
     }
 }
