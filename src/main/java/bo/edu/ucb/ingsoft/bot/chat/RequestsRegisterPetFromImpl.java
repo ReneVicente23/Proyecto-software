@@ -35,7 +35,6 @@ public class RequestsRegisterPetFromImpl extends AbstractProcess{
         PetListDto pet=this.t;
 
         if (this.getStatus().equals("STARTED")) {
-
             showPets(bot, chatId, pet);
         } else if (this.getStatus().equals("AWAITING_USER_RESPONSE")) {
             // Estamos esperando por un 1 Si o 2 No
@@ -44,46 +43,11 @@ public class RequestsRegisterPetFromImpl extends AbstractProcess{
                 // Intentamos transformar en número
                 String text = message.getText(); // El texto contiene asdasdas
                 try {
-                    if(pet.getPetName().contentEquals(" ")){
-                        pet.setPetName(text);
+                    if(pet.getPetImage().contentEquals(" ")){
+                        pet.petWrite(text);
                         result = new RequestsRegisterPetFromImpl(pet);
                     }else{
-                        if(pet.getPetTipe().contentEquals(" ")){
-                            pet.setPetTipe(text);
-                            result = new RequestsRegisterPetFromImpl(pet);
-                        }else{
-                            if(pet.getPetAge().contentEquals(" ")){
-                                pet.setPetAge(text);
-                                result = new RequestsRegisterPetFromImpl(pet);
-                            }else{
-                                if(pet.getPetGender().contentEquals(" ")){
-                                    pet.setPetGender(text);
-                                    result = new RequestsRegisterPetFromImpl(pet);
-                                }else{
-                                    if(pet.getPetStat().contentEquals(" ")){
-                                        pet.setPetStat(text);
-                                        result = new RequestsRegisterPetFromImpl(pet);
-                                    }else{
-                                        if(pet.getPetCare().contentEquals(" ")){
-                                            pet.setPetCare(text);
-                                            result = new RequestsRegisterPetFromImpl(pet);
-                                        }else{
-                                            if(pet.getPetContacts().contentEquals(" ")){
-                                                pet.setPetContacts(text);
-                                                result = new RequestsRegisterPetFromImpl(pet);
-                                            }else{
-                                                if(pet.getPetImage().contentEquals(" ")){
-                                                    pet.setPetImage(text);
-                                                    result = new RequestsRegisterPetFromImpl(pet);
-                                                } else{
-                                                    result = new MenuProcessImpl();
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        result = new MenuProcessImpl();
                     }
                 } catch (Exception ex) {
                     showPets(bot, chatId,pet);
@@ -98,47 +62,9 @@ public class RequestsRegisterPetFromImpl extends AbstractProcess{
 
     private void showPets(MascotaLongPullingBot bot, Long chatId, PetListDto pet) {
         StringBuffer sb = new StringBuffer();
-        if(pet.getPetName().contentEquals(" ")){
-            sb.append("Ingrese el nombre de la mascota: \r\n" );
-        }else{
-            if(pet.getPetTipe().contentEquals(" ")){
-                sb.append("Ingrese la especie y raza de la mascota: \r\n" );
-            }else{
-                if(pet.getPetAge().contentEquals(" ")){
-                    sb.append("Ingrese la edad de la mascota: \r\n" );
-                }else{
-                    if(pet.getPetGender().contentEquals(" ")){
-                        sb.append("Ingrese el genero de la mascota: \r\n" );
-                    }else{
-                        if(pet.getPetStat().contentEquals(" ")){
-                            sb.append("Ingrese rasgos de la mascota: \r\n" );
-                        }else{
-                            if(pet.getPetCare().contentEquals(" ")){
-                                sb.append("¿su mascota tiene cuidados especiales? (si no tiene cuidados especiales ingrese no): \r\n" );
-                            }else{
-                                if(pet.getPetContacts().contentEquals(" ")){
-                                    sb.append("¿tiene contactos adicionales? (si no los tiene ingrese no): \r\n" );
-                                }else{
-                                    if(pet.getPetImage().contentEquals(" ")){
-                                        sb.append("espacio de prueba para imagenes ingrese cualquier texto \r\n" );
-                                    } else{
-                                        sb.append("Los datos ingresados son:  \r\n" );
-                                        sb.append(pet.toString()+"  \r\n" );
-                                        sb.append("ingrese cualquier carracter para continuar al menu principal:  \r\n" );
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        sb.append(pet.petForm() + "\r\n");
         sendStringBuffer(bot, chatId, sb);
 
-        String nombre = "Juan";
-        String apellido = "Perez";
-        String nombreCompleto = nombre + " " + apellido;
         this.setStatus("AWAITING_USER_RESPONSE");
     }
 
