@@ -1,14 +1,19 @@
 package bo.edu.ucb.ingsoft.bot.chat;
 
+import bo.edu.ucb.ingsoft.bot.dto.NeighborDto;
 import bo.edu.ucb.ingsoft.bot.dto.PetListDto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class RegisterNeighborsGroupProcessIml extends AbstractProcess {
+public class RegisterNeighborsGroupFormProcessIml extends AbstractProcess {
 
 
-    private PetListDto t;
+    private NeighborDto t;
 
-    public RegisterNeighborsGroupProcessIml(){
+    public RegisterNeighborsGroupFormProcessIml(
+          //  this.setName("Agregar Nuevo Vecino");
+
+    ){
+
 
     }
     @Override
