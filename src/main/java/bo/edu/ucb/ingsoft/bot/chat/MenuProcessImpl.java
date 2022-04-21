@@ -43,10 +43,11 @@ public class MenuProcessImpl extends AbstractProcess {
                     switch (opcion){
                         case 1 : result = new RequestsRegisterPetProcessImpl();
                         break;
-                        case 2 : result = new RequestsPermissionProcessImpl();
-                        break;
+
 
                         case 4 : result = new RegisterNeighborsGroupProcessImpl();
+                        break;
+                        case 5 : result = new RegisterPetFoundProcessImpl();
                         break;
                         default: showMainMenu(bot, chatId);
                     }
