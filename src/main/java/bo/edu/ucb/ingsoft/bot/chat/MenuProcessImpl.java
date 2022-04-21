@@ -45,6 +45,8 @@ public class MenuProcessImpl extends AbstractProcess {
                         break;
                         case 2 : result = new RequestsPermissionProcessImpl();
                         break;
+                        case 4 : result = new RegisterNeighborsGroupProcessIml();
+                        break;
                         default: showMainMenu(bot, chatId);
                     }
                 } catch (NumberFormatException ex) {

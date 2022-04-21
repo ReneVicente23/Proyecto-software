@@ -29,13 +29,13 @@ public class MascotaLongPullingBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "MascotasSoftBot";
-    }
+        return "MascotasSoftBot.";          /* return "t.me/mascotasjosebot.";*/
+    }//MascotasSoftBot  original // nombre del bot
 
     @Override
     public String getBotToken() {
-        return "5218989594:AAGrNwzWiDxap5B6x7SGFOMVl5wLVS7xAME";
-    }
+        return "5218989594:AAGrNwzWiDxap5B6x7SGFOMVl5wLVS7xAME";  /* return "5240106822:AAGvYbpaJ29E2Ti1srzISu9n3vf_MJsfEys";    */
+    } //5218989594:AAGrNwzWiDxap5B6x7SGFOMVl5wLVS7xAME       original // key
 
     public void sendMyMessage(BotApiMethod method) throws TelegramApiException {
         System.out.println("Enviando mensaje: " + method);
