@@ -2,11 +2,11 @@ package bo.edu.ucb.ingsoft.bot.chat;
 import bo.edu.ucb.ingsoft.bot.dto.NeighborListDto;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-public class RegisterNeighborsGroupFromProcessIml extends AbstractProcess {
+public class RegisterNeighborsGroupFromProcessImpl extends AbstractProcess {
 
     private NeighborListDto t;
 
-    public RegisterNeighborsGroupFromProcessIml(){
+    public RegisterNeighborsGroupFromProcessImpl(){
         this.setName("Agregar Nuevo Vecino");
         this.setDefault(false);
         this.setExpires(false);
@@ -15,7 +15,7 @@ public class RegisterNeighborsGroupFromProcessIml extends AbstractProcess {
         this.t=new NeighborListDto();
     }
 
-    public RegisterNeighborsGroupFromProcessIml(NeighborListDto t){
+    public RegisterNeighborsGroupFromProcessImpl(NeighborListDto t){
         this.setName("Form Agregar Nuevo Vecino");
         this.setDefault(false);
         this.setExpires(false);
@@ -32,7 +32,7 @@ public class RegisterNeighborsGroupFromProcessIml extends AbstractProcess {
 
             if (this.getStatus().equals("STARTED")){
                 showNeighbor(bot, chadId, neighbor);
-            } else if (this.getStatus().equals("AWAITING_USER_RESPONDSE")) {
+            } else if (this.getStatus().equals("AWAITING_USER_RESPONSE")) {
 
                 Message message = update.getMessage();
                     if(message.hasText()){
@@ -41,7 +41,7 @@ public class RegisterNeighborsGroupFromProcessIml extends AbstractProcess {
                         try{
                             if(neighbor.getNeighborPhoto().contentEquals("")){
                                 neighbor.neighborsWrite(text);
-                                result = new RegisterNeighborsGroupFromProcessIml(neighbor);
+                                result = new RegisterNeighborsGroupFromProcessImpl(neighbor);
                             }else {
                                 result = new MenuProcessImpl();
                             }

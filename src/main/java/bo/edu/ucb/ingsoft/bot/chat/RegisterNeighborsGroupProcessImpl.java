@@ -36,7 +36,7 @@ public class RegisterNeighborsGroupProcessImpl extends AbstractProcess{
                         int opcion = Integer.parseInt(text);
                         switch (opcion) {
                             case 1:
-                                result = new RegisterNeighborsGroupFromProcessIml();
+                                result = new RegisterNeighborsGroupFromProcessImpl();
                                 break;
                             case 2:
                                 result = new MenuProcessImpl();
