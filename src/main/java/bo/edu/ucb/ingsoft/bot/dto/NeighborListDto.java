@@ -109,14 +109,14 @@ public class NeighborListDto {
 
     @Override
     public String toString() {
-        return "NeighborName='" + NeighborName + '\'' +
-                "\n, NeighBorLastName='" + NeighBorLastName + '\'' +
-                "\n, NeighborDocumentIdentification='" + NeighborDocumentIdentification + '\'' +
-                "\n, NeighborAge='" + NeighborAge + '\'' +
-                "\n, NeighborCellPhoneNumber='" + NeighborCellPhoneNumber + '\'' +
-                "\n, NeighborEmail='" + NeighborEmail + '\'' +
-                "\n, NeighborAddress='" + NeighborAddress + '\'' +
-                "\n, NeighborPhoto='" + NeighborPhoto + '\'' +
+        return "Nombres='" + NeighborName + '\'' +
+                "\n, Apellidos='" + NeighBorLastName + '\'' +
+                "\n, Docuemento de Identidad='" + NeighborDocumentIdentification + '\'' +
+                "\n, Edad='" + NeighborAge + '\'' +
+                "\n, Celular='" + NeighborCellPhoneNumber + '\'' +
+                "\n, Email='" + NeighborEmail + '\'' +
+                "\n, Direccion='" + NeighborAddress + '\'' +
+                "\n, Foto='" + NeighborPhoto + '\'' +
                 "\n -----------------------------------";
     }
 
