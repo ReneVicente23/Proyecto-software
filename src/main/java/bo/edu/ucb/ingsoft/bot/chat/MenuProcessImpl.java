@@ -45,7 +45,7 @@ public class MenuProcessImpl extends AbstractProcess {
                         break;
                         case 2 : result = new RequestsPermissionProcessImpl();
                         break;
-                        case 4 : result = new RegisterNeighborsGroupFormProcessIml();
+                        case 4 : result = new RegisterNeighborsGroupFromProcessIml();
                         break;
                         default: showMainMenu(bot, chatId);
                     }
