@@ -131,11 +131,11 @@ public class NeighborListDto {
                     }
                 else{
                     if(getNeighborDocumentIdentification().contentEquals("")){
-                            resp1=("Ingrese el numero de identificacion personal porfavor \r\n");
+                            resp1=("Ingrese el numero de identificacion personal porfavor: \r\n");
                         }
                     else {
                         if(getNeighborAge().contentEquals("")){
-                                resp1=("Ingrese su edad porfavor \r\n");
+                                resp1=("Ingrese su edad porfavor: \r\n");
                             }
                         else{
                             if(getNeighborCellPhoneNumber().contentEquals("")){
@@ -176,25 +176,29 @@ public class NeighborListDto {
             } else{
                 if(getNeighBorLastName().contentEquals("")){
                     setNeighBorLastName(text);
-                } else{
-                    if(getNeighborDocumentIdentification().contentEquals("")){
+                } else {
+                    if (getNeighborDocumentIdentification().contentEquals("")) {
                         setNeighborDocumentIdentification(text);
-                    } else{
-                        if(getNeighborEmail().contentEquals("")){
-                            setNeighborEmail(text);
-                        }
-                    else{
-                        if(getNeighborAddress().contentEquals("")){
-                                setNeighborAddress(text);
-                            }
-                        else{
-                            if(getNeighborPhoto().contentEquals("")){
-                                    setNeighborPhoto(text);
+                    } else {
+                        if (getNeighborAge().contentEquals("")) {
+                            setNeighborAge(text);
+                        } else {
+                            if
+
+                            (getNeighborEmail().contentEquals("")) {
+                                setNeighborEmail(text);
+                            } else {
+                                if (getNeighborAddress().contentEquals("")) {
+                                    setNeighborAddress(text);
+                                } else {
+                                    if (getNeighborPhoto().contentEquals("")) {
+                                        setNeighborPhoto(text);
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
         }
     }
 }
