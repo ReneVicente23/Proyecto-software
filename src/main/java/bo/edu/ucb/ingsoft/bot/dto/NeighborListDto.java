@@ -183,16 +183,19 @@ public class NeighborListDto {
                         if (getNeighborAge().contentEquals("")) {
                             setNeighborAge(text);
                         } else {
-                            if
-
-                            (getNeighborEmail().contentEquals("")) {
+                            if (getNeighborCellPhoneNumber().contentEquals("")) {
                                 setNeighborEmail(text);
                             } else {
-                                if (getNeighborAddress().contentEquals("")) {
+                                if (getNeighborEmail().contentEquals("")) {
                                     setNeighborAddress(text);
                                 } else {
-                                    if (getNeighborPhoto().contentEquals("")) {
+                                    if (getNeighborAddress().contentEquals("")) {
                                         setNeighborPhoto(text);
+                                    }
+                                    else{
+                                        if(getNeighborPhoto().contentEquals("")){
+                                            setNeighborPhoto(text);
+                                        }
                                     }
                                 }
                             }
