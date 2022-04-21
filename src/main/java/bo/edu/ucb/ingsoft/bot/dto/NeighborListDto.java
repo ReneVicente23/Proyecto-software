@@ -109,14 +109,14 @@ public class NeighborListDto {
 
     @Override
     public String toString() {
-        return "NeighborName='" + NeighborName + '\'' +
-                "\n, NeighBorLastName='" + NeighBorLastName + '\'' +
-                "\n, NeighborDocumentIdentification='" + NeighborDocumentIdentification + '\'' +
-                "\n, NeighborAge='" + NeighborAge + '\'' +
-                "\n, NeighborCellPhoneNumber='" + NeighborCellPhoneNumber + '\'' +
-                "\n, NeighborEmail='" + NeighborEmail + '\'' +
-                "\n, NeighborAddress='" + NeighborAddress + '\'' +
-                "\n, NeighborPhoto='" + NeighborPhoto + '\'' +
+        return "Nombres='" + NeighborName + '\'' +
+                "\n, Apellidos='" + NeighBorLastName + '\'' +
+                "\n, Docuemento de Identidad='" + NeighborDocumentIdentification + '\'' +
+                "\n, Edad='" + NeighborAge + '\'' +
+                "\n, Celular='" + NeighborCellPhoneNumber + '\'' +
+                "\n, Email='" + NeighborEmail + '\'' +
+                "\n, Direccion='" + NeighborAddress + '\'' +
+                "\n, Foto='" + NeighborPhoto + '\'' +
                 "\n -----------------------------------";
     }
 
@@ -131,11 +131,11 @@ public class NeighborListDto {
                     }
                 else{
                     if(getNeighborDocumentIdentification().contentEquals("")){
-                            resp1=("Ingrese el numero de identificacion personal porfavor \r\n");
+                            resp1=("Ingrese el numero de identificacion personal porfavor: \r\n");
                         }
                     else {
                         if(getNeighborAge().contentEquals("")){
-                                resp1=("Ingrese su edad porfavor \r\n");
+                                resp1=("Ingrese su edad porfavor: \r\n");
                             }
                         else{
                             if(getNeighborCellPhoneNumber().contentEquals("")){
@@ -176,25 +176,32 @@ public class NeighborListDto {
             } else{
                 if(getNeighBorLastName().contentEquals("")){
                     setNeighBorLastName(text);
-                } else{
-                    if(getNeighborDocumentIdentification().contentEquals("")){
+                } else {
+                    if (getNeighborDocumentIdentification().contentEquals("")) {
                         setNeighborDocumentIdentification(text);
-                    } else{
-                        if(getNeighborEmail().contentEquals("")){
-                            setNeighborEmail(text);
-                        }
-                    else{
-                        if(getNeighborAddress().contentEquals("")){
-                                setNeighborAddress(text);
-                            }
-                        else{
-                            if(getNeighborPhoto().contentEquals("")){
-                                    setNeighborPhoto(text);
+                    } else {
+                        if (getNeighborAge().contentEquals("")) {
+                            setNeighborAge(text);
+                        } else {
+                            if (getNeighborCellPhoneNumber().contentEquals("")) {
+                                setNeighborEmail(text);
+                            } else {
+                                if (getNeighborEmail().contentEquals("")) {
+                                    setNeighborAddress(text);
+                                } else {
+                                    if (getNeighborAddress().contentEquals("")) {
+                                        setNeighborPhoto(text);
+                                    }
+                                    else{
+                                        if(getNeighborPhoto().contentEquals("")){
+                                            setNeighborPhoto(text);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
         }
     }
 }
