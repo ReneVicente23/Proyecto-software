@@ -33,7 +33,7 @@ public class RequestsRegisterPetProcessImpl extends AbstractProcess{
     public AbstractProcess handle(ApplicationContext context, Update update, MascotaLongPullingBot bot) {
         AbstractProcess result = this; // sigo en el mismo proceso. MOD
         Long chatId = update.getMessage().getChatId();
-        //LOGGER.info("Id result: {} ",usuarioBl.validChatid(chatId));
+        LOGGER.info("Id result: {} ",usuarioBl.validChatid(chatId));
         //usuarioBl.validChatid(chatId);
 
         if (this.getStatus().equals("STARTED")) {

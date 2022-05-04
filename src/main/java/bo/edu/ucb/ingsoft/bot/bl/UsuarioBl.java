@@ -18,7 +18,8 @@ public class UsuarioBl {
 
 
     public String validChatid(Long chatId) {
-        UsuarioDto result=usuarioDao.validChatid(chatId+"");
+        Integer chat= Math.toIntExact(chatId);
+        UsuarioDto result=usuarioDao.validChatid(chat);
         return result.toString();
     }
 }
