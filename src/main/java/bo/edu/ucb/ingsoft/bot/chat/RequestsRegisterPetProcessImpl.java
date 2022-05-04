@@ -1,13 +1,26 @@
 package bo.edu.ucb.ingsoft.bot.chat;
 
 import bo.edu.ucb.ingsoft.bot.bl.PetListBl;
+import bo.edu.ucb.ingsoft.bot.bl.UsuarioBl;
 import bo.edu.ucb.ingsoft.bot.dto.PetListDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 
+@Service
 public class RequestsRegisterPetProcessImpl extends AbstractProcess{
-    public RequestsRegisterPetProcessImpl() {
+    private UsuarioBl usuarioBl;
+    //LOGGER
+    private static Logger LOGGER = LoggerFactory.getLogger(RequestsRegisterPetProcessImpl.class);
+
+    @Autowired
+    public RequestsRegisterPetProcessImpl(UsuarioBl usuarioBl) {
+        this.usuarioBl = usuarioBl;
         this.setName("Agregar Nueva mascota");
         this.setDefault(false);
         this.setExpires(false);
@@ -17,9 +30,11 @@ public class RequestsRegisterPetProcessImpl extends AbstractProcess{
     }
 
     @Override
-    public AbstractProcess handle(Update update, MascotaLongPullingBot bot) {
+    public AbstractProcess handle(ApplicationContext context, Update update, MascotaLongPullingBot bot) {
         AbstractProcess result = this; // sigo en el mismo proceso. MOD
         Long chatId = update.getMessage().getChatId();
+        //LOGGER.info("Id result: {} ",usuarioBl.validChatid(chatId));
+        //usuarioBl.validChatid(chatId);
 
         if (this.getStatus().equals("STARTED")) {
 
@@ -33,7 +48,7 @@ public class RequestsRegisterPetProcessImpl extends AbstractProcess{
                 try {
                     int opcion = Integer.parseInt(text);
                     switch (opcion){
-                        case 1 : result = new RequestsRegisterPetFromImpl();
+                        case 1 : result = context.getBean(RequestsRegisterPetFromImpl.class);
                             break;
                         case 2 : result = new MenuProcessImpl();
                             break;

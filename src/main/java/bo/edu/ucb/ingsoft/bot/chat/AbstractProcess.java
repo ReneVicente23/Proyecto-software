@@ -1,5 +1,6 @@
 package bo.edu.ucb.ingsoft.bot.chat;
 
+import org.springframework.context.ApplicationContext;
 import bo.edu.ucb.ingsoft.bot.chat.widgets.AbstractWidget;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -30,7 +31,7 @@ public abstract class AbstractProcess {
     private String status;
 
     // Este metodo decide que hacer con el usuario en cada tipo de proceso.
-    public abstract AbstractProcess handle(Update update, MascotaLongPullingBot bot);
+    public abstract AbstractProcess handle(ApplicationContext context, Update update, MascotaLongPullingBot bot);
 
 //    // Método que se invoca al iniciar el proceso
 //    public abstract AbstractWidget onInit();

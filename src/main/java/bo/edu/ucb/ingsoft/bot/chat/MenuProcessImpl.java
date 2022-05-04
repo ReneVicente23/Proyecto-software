@@ -1,12 +1,13 @@
 package bo.edu.ucb.ingsoft.bot.chat;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.springframework.context.ApplicationContext;
 
 import java.util.HashMap;
 
 public class MenuProcessImpl extends AbstractProcess {
-
     public MenuProcessImpl() {
         this.setName("Menú principal");
         this.setDefault(true);
@@ -25,7 +26,7 @@ public class MenuProcessImpl extends AbstractProcess {
 
 
     @Override
-    public AbstractProcess handle(Update update, MascotaLongPullingBot bot) {
+    public AbstractProcess handle(ApplicationContext context, Update update, MascotaLongPullingBot bot) {
         AbstractProcess result = this; // sigo en el mismo proceso.
         Long chatId = update.getMessage().getChatId();
 
@@ -34,6 +35,7 @@ public class MenuProcessImpl extends AbstractProcess {
             showMainMenu(bot, chatId);
         } else if (this.getStatus().equals("AWAITING_USER_RESPONSE")) {
             // Estamos esperando por un numero 1 o 2
+
             Message message = update.getMessage();
             if ( message.hasText() ) {
                 // Intentamos transformar en número
@@ -41,7 +43,7 @@ public class MenuProcessImpl extends AbstractProcess {
                 try {
                     int opcion = Integer.parseInt(text);
                     switch (opcion){
-                        case 1 : result = new RequestsRegisterPetProcessImpl();
+                        case 1 : result = context.getBean(RequestsRegisterPetProcessImpl.class);
                         break;
 
 

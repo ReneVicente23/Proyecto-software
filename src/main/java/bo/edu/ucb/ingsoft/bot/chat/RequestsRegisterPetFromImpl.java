@@ -2,11 +2,13 @@ package bo.edu.ucb.ingsoft.bot.chat;
 
 import bo.edu.ucb.ingsoft.bot.bl.PetListBl;
 import bo.edu.ucb.ingsoft.bot.dto.PetListDto;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
-
+@Service
 public class RequestsRegisterPetFromImpl extends AbstractProcess{
     private PetListDto t;
     public RequestsRegisterPetFromImpl() {
@@ -29,7 +31,7 @@ public class RequestsRegisterPetFromImpl extends AbstractProcess{
     }
 
     @Override
-    public AbstractProcess handle(Update update, MascotaLongPullingBot bot) {
+    public AbstractProcess handle(ApplicationContext context, Update update, MascotaLongPullingBot bot) {
         AbstractProcess result = this; // sigo en el mismo proceso. MOD
         Long chatId = update.getMessage().getChatId();
         PetListDto pet=this.t;

@@ -1,5 +1,6 @@
 package bo.edu.ucb.ingsoft.bot.chat;
 import bo.edu.ucb.ingsoft.bot.dto.NeighborListDto;
+import org.springframework.context.ApplicationContext;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 public class RegisterNeighborsGroupFromProcessImpl extends AbstractProcess {
@@ -25,7 +26,7 @@ public class RegisterNeighborsGroupFromProcessImpl extends AbstractProcess {
 
     }
     @Override
-    public AbstractProcess handle(Update update, MascotaLongPullingBot bot) {
+    public AbstractProcess handle(ApplicationContext context, Update update, MascotaLongPullingBot bot) {
         AbstractProcess result = this; //signop en el mismo MOD
         Long chadId = update.getMessage().getChatId();
         NeighborListDto neighbor=this.t;
