@@ -20,6 +20,16 @@ public class UsuarioBl {
     public String validChatid(Long chatId) {
         Integer chat= Math.toIntExact(chatId);
         UsuarioDto result=usuarioDao.validChatid(chat);
-        return result.toString();
+        if(result.getTelegram_id()!= null){
+            return result.getTelegram_id()+"";
+        }else{
+            return " ";
+        }
+        //return result.toString();
+    }
+
+    public void saveUsuario(Long chatId) {
+        Integer chat= Math.toIntExact(chatId);
+        usuarioDao.saveUsuario(chat);
     }
 }

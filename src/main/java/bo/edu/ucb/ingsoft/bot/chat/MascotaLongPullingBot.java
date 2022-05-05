@@ -6,6 +6,8 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,8 @@ public class MascotaLongPullingBot extends TelegramLongPollingBot {
     private boolean test = false;
     private List<BotApiMethod> testMessages = new ArrayList<>();
     private ApplicationContext context;
+    //LOGGER
+    private static Logger LOGGER = LoggerFactory.getLogger(MascotaLongPullingBot.class);
 
     public MascotaLongPullingBot(ApplicationContext context) {
         this.context = context;
@@ -42,7 +46,8 @@ public class MascotaLongPullingBot extends TelegramLongPollingBot {
     } //5218989594:AAGrNwzWiDxap5B6x7SGFOMVl5wLVS7xAME       original // key
 
     public void sendMyMessage(BotApiMethod method) throws TelegramApiException {
-        System.out.println("Enviando mensaje: " + method);
+        LOGGER.info("Enviando mensaje: {} ",method);
+        //System.out.println("Enviando mensaje: " + method);
         if (test) {
             // no enviamos
             testMessages.add(method);
@@ -55,33 +60,40 @@ public class MascotaLongPullingBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         // Primero identifico al usuario por chat Id Long
         Long chatId = update.getMessage().getChatId();
-        System.out.println("\n\n===========> Recibiendo chatId: " + chatId);
+        LOGGER.info("===========> Recibiendo chatId: {} ",chatId);
+        //System.out.println("\n\n===========> Recibiendo chatId: " + chatId);
         // Busco si ya existe Proceso en el map userSession
         AbstractProcess currentProcess = usersSession.get(chatId);
 
         if (currentProcess == null) { // Primera vez que se contacto con nostros.
-            System.out.println("Creando proceso para el  chatId: " + chatId);
+            LOGGER.info("\"Creando proceso para el  chatId: {} ",chatId);
+            //System.out.println("Creando proceso para el  chatId: " + chatId);
             // Debo crear el proceso por defecto
             currentProcess = new MenuProcessImpl();
             usersSession.put(chatId, currentProcess);
-            System.out.println("Derivando la conversación al proceso: " + currentProcess.getName());
+            LOGGER.info("Derivando la conversación al proceso: {} ",currentProcess.getName());
+            //System.out.println("Derivando la conversación al proceso: " + currentProcess.getName());
             AbstractProcess nextProcess = currentProcess.handle(context, update, this);
 
             if (!nextProcess.equals(currentProcess)) { // Si el siguiente proceso es diferente lo iniciamos
-                System.out.println("Iniciando siguiente proceso: " + nextProcess.getName());
+                LOGGER.info("Iniciando siguiente proceso: {} ",nextProcess.getName());
+                //System.out.println("Iniciando siguiente proceso: " + nextProcess.getName());
                 nextProcess.handle(context, update, this);
             } else {
-                System.out.println("No hay cambio de proceso, así que termina conversación");
+                LOGGER.info("No hay cambio de proceso, así que termina conversación");
+                //System.out.println("No hay cambio de proceso, así que termina conversación");
             }
             usersSession.put(chatId, nextProcess);
 
         } else { // Ya existe un proceso
-            System.out.println("Continuamos el proceso para el  chatId: " + chatId
-                    + " proceso: " + currentProcess.getName());
+            LOGGER.info("Continuamos el proceso para el  chatId: {} proceso: {} ",chatId,currentProcess.getName());
+           // System.out.println("Continuamos el proceso para el  chatId: " + chatId
+            //        + " proceso: " + currentProcess.getName());
             AbstractProcess nextProcess = currentProcess.handle(context, update, this);
 
             if (!nextProcess.equals(currentProcess)) { // Si el siguiente proceso es diferente
-                System.out.println("Iniciando siguiente proceso: " + nextProcess.getName());
+                LOGGER.info("Iniciando siguiente proceso: {} ",nextProcess.getName());
+                //System.out.println("Iniciando siguiente proceso: " + nextProcess.getName());
                 nextProcess = nextProcess.handle(context, update, this);
             } else {
                 System.out.println("No hay cambio de proceso, así que termina conversación");

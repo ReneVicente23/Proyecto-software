@@ -61,7 +61,7 @@ public class UsuarioDto {
 
     @Override
     public String toString() {
-        return "UsuarioDto" +
+        return "UsuarioDto:  " +
                 "id_usuario= " + id_usuario +
                 ", chatid= " + telegram_id;
     }
