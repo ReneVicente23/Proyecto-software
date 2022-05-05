@@ -46,9 +46,7 @@ public class RequestsRegisterPetProcessImpl extends AbstractProcess{
             LOGGER.error("error:  ",e);
             usuarioBl.saveUsuario(chatId);
         }
-
-        //LOGGER.info("Id result: {} ",usuarioBl.validChatid(chatId));
-        //usuarioBl.validChatid(chatId);
+        //fin modulo guardar usuario
 
         if (this.getStatus().equals("STARTED")) {
 

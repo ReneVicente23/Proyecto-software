@@ -25,13 +25,13 @@ public class PetListBl {
     public void savePet(PetListDto petListDto, Long chatId){
         Integer chat= Math.toIntExact(chatId);
         String name=petListDto.getPet_name();
-        String tipe=petListDto.getPet_name();
-        String age=petListDto.getPet_name();
-        String gender=petListDto.getPet_name();
-        String stat=petListDto.getPet_name();
-        String care=petListDto.getPet_name();
-        String contacts=petListDto.getPet_name();
-        String image=petListDto.getPet_name();
+        String tipe=petListDto.getPet_tipe();
+        String age=petListDto.getPet_age();
+        String gender=petListDto.getPetGender();
+        String stat=petListDto.getPet_stat();
+        String care=petListDto.getPet_care();
+        String contacts=petListDto.getPet_contacts();
+        String image=petListDto.getPet_image();
 
         petListDao.savePet(name,tipe,age,gender,stat,care,contacts,image,chat);
     }
