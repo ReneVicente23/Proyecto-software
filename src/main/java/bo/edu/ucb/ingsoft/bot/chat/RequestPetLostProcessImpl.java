@@ -97,9 +97,9 @@ public class RequestPetLostProcessImpl extends AbstractProcess{
         StringBuffer sb = new StringBuffer();
         List<PetListDto> petlist = petListBl.findPets(chatId);
         if(petlist.size()==0){
-            sb.append("No tiene mascotas Registradas\r\n" );
+            sb.append("No tiene mascotas Registradas😕\r\n" );
         }else{
-            sb.append("Tiene registradas las siguientes mascotas: \r\n" ).append(petlist.size());
+            sb.append("Tiene registradas las siguientes mascotas🐶: \r\n" ).append(petlist.size());
             for(PetListDto pets: petlist) {
                 sb.append(pets.toString()).append("\n\r");
             }
@@ -112,7 +112,7 @@ public class RequestPetLostProcessImpl extends AbstractProcess{
 
         //LOGGER.error("error:  ",e);
         //sb.append("No tiene mascotas Registradas\r\n" );
-        sb.append("¿Desea Continuar? (Si: Ingrese: (Id mascota / Numero zona)(Ej: 1/1)/No: N/N)\r\n" );
+        sb.append("¿Desea Continuar? (Si✅: Ingrese: (Id mascota / Número zona)(Ej: 1/1) / No❌: N / N)\r\n" );
         sendStringBuffer(bot, chatId, sb);
         this.setStatus("AWAITING_USER_RESPONSE");
     }
@@ -121,7 +121,7 @@ public class RequestPetLostProcessImpl extends AbstractProcess{
 
         StringBuffer sb = new StringBuffer();
 
-        sb.append("Ingrese el numero de la zona donde se perdio su mascota\r\n" );
+        sb.append("Ingrese el numero de la zona donde se perdió su mascota😥\r\n" );
         sb.append("1. Sopocachi\r\n" );
         sb.append("2. Obrajes\r\n" );
         sb.append("3. San Miguel\r\n" );
