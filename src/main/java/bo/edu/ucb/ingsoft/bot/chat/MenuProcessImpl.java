@@ -45,8 +45,8 @@ public class MenuProcessImpl extends AbstractProcess {
                     switch (opcion){
                         case 1 : result = context.getBean(RequestsRegisterPetProcessImpl.class);
                         break;
-
-
+                        case 2: result = context.getBean(RequestPetLostProcessImpl.class);
+                        break;
                         case 4 : result = new RegisterNeighborsGroupProcessImpl();
                         break;
                         case 5 : result = new RegisterPetFoundProcessImpl();
