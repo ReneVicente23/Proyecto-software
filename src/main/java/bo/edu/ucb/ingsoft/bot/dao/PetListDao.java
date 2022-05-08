@@ -14,9 +14,10 @@ public interface PetListDao {
     @Select("SELECT p.pet_id, p.pet_name, p.pet_tipe, p.pet_age, p.pet_gender,p.pet_stat, p.pet_care, p.pet_contacts, p.pet_image, p.state ,p.mod_user, p.mod_date, p.usuario_id_usuario " +
             "FROM pet p JOIN usuario u  ON p.usuario_id_usuario = u.id_usuario WHERE u.telegram_id = #{userid} AND p.state = 1")
     public List<PetListDto> findPets(@Param("userid") Integer id);
+
 /*
-    @Select("SELECT id_usuario, telegram_id , state , mod_user , mod_date "+
-            "FROM usuario WHERE telegram_id = #{userid} AND state = 1")
+    @Select("SELECT pet_id "+
+            "FROM pet WHERE pet_id = #{userid} AND state = 1")
     public UsuarioDto validChatid(@Param("userid") Integer id);
 */
     @Insert("INSERT INTO pet(pet_name, pet_tipe, pet_age, pet_gender, pet_stat, pet_care, pet_contacts,pet_image, state,mod_user,mod_date,usuario_id_usuario) " +

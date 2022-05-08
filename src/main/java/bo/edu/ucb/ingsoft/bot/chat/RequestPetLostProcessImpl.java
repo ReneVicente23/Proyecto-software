@@ -75,7 +75,9 @@ public class RequestPetLostProcessImpl extends AbstractProcess{
                         //Integer auxzone = Integer.parseInt(respuesta[1]);
                         System.out.println(auxid+" "+auxzone);
                         //placeListTest(bot,chatId);
-                        petlostbl.saveLostPet(auxid,auxzone);
+                        List<PetListDto> petlist = petListBl2.findPets(chatId);
+                        Integer s= petlist.get((auxid-1)).getPet_id();
+                        petlostbl.saveLostPet(s,auxzone);
                         //System.out.println(text);
 
                         this.setStatus("STARTED");
