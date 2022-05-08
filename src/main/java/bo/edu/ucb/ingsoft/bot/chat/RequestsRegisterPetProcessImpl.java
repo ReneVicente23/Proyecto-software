@@ -6,6 +6,7 @@ import bo.edu.ucb.ingsoft.bot.dto.PetListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.slf4j.Logger;
@@ -91,9 +92,15 @@ public class RequestsRegisterPetProcessImpl extends AbstractProcess{
             sb.append("Tiene registradas las siguientes mascotas: \r\n" ).append(petlist.size());
             for(PetListDto pets: petlist) {
                 sb.append(pets.toString()).append("\n\r");
+                String s=pets.getPet_image();
+                //String s="AgACAgEAAxkBAAIHC2J4Lkv1qXmqfFr-TnUnY0LHZ787AAIsqjEbG4fBR6FaJteKIvPxAQADAgADcwADJAQ";
+                sendStringBuffer(bot, chatId, sb);
+                sendPhotoB(bot,chatId,s);
+                sb.setLength(0);
+                //String s="AgACAgEAAxkBAAIHC2J4Lkv1qXmqfFr-TnUnY0LHZ787AAIsqjEbG4fBR6FaJteKIvPxAQADAgADcwADJAQ";
+                //String s=pets.getPet_image();
             }
         }
-
             //LOGGER.error("error:  ",e);
             //sb.append("No tiene mascotas Registradas\r\n" );
         sb.append("¿Desea Continuar? (1: Si/2: No)\r\n" );

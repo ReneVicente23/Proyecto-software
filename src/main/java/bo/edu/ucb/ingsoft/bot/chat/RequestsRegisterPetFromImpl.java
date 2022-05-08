@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -55,20 +57,44 @@ public class RequestsRegisterPetFromImpl extends AbstractProcess{
             if ( message.hasText() ) {
                 // Intentamos transformar en número
                 String text = message.getText(); // El texto contiene asdasdas
+                //message.getPhoto();
+                //List<PhotoSize> a=message.getPhoto();
                 try {
-                    if(pet.getPet_image().contentEquals(" ")){
+                    if(pet.getPet_contacts().contentEquals(" ")){
                         pet.petWrite(text);
                         result = new RequestsRegisterPetFromImpl(pet,petListBl2);
                     }else{
-                        savePets(bot, chatId, pet);
-                        this.setStatus("STARTED");
-                        result = new MenuProcessImpl();
+                        if(pet.getPet_image().contentEquals(" ")){
+                            List<PhotoSize> a=update.getMessage().getPhoto();
+
+                            System.out.println(a.size());
+                            System.out.println(a.toArray());
+                        }else{
+                            savePets(bot, chatId, pet);
+                            this.setStatus("STARTED");
+                            result = new MenuProcessImpl();
+                        }
+
                     }
                 } catch (Exception ex) {
                     showPets(bot, chatId,pet);
                 }
                 // continuar con el proceso seleccionado
             } else { // Si me enviaron algo diferente de un texto.
+                if(message.hasPhoto()){
+                    if(pet.getPet_image().contentEquals(" ")){
+                        List<PhotoSize> a=update.getMessage().getPhoto();
+                        pet.petWrite(a.get(0).getFileId());
+                    }else{
+                        savePets(bot, chatId, pet);
+                        this.setStatus("STARTED");
+                        result = new MenuProcessImpl();
+                    }
+                    //List<PhotoSize> a=update.getMessage().getPhoto();
+                    //System.out.println(a.size());
+                    //System.out.println(a.get(0).getFileId());
+                    //System.out.println(a.toString());
+                }
                 showPets(bot, chatId,pet);
             }
         }

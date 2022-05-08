@@ -166,9 +166,9 @@ public class PetListDto {
                 "\n Genero= '" + pet_gender + '\'' +
                 "\n Rasgos= '" + pet_stat + '\'' +
                 "\n Cuidados= '" + pet_care + '\'' +
-                "\n Contactos= '" + pet_contacts + '\'' +
-                "\n Imagen= '" + pet_image + '\''+
-                "\n ---------------------------------";
+                "\n Contactos= '" + pet_contacts + '\'' ;//+
+                //"\n Imagen= '" + pet_image + '\''+
+                //"\n ---------------------------------";
     }
 
     public String petForm(){
@@ -195,7 +195,7 @@ public class PetListDto {
                                     resp=("¿tiene contactos adicionales? (si no los tiene ingrese no): \r\n" );
                                 }else{
                                     if(getPet_image().contentEquals(" ")){
-                                        resp=("espacio de prueba para imagenes ingrese cualquier texto \r\n" );
+                                        resp=("Adjunte una foto de su mascota o tome una desde adjuntar \r\n" );
                                     } else{
                                         resp=("Los datos ingresados son:  \r\n" );
                                         resp=resp+(toString()+"  \r\n" );

@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import bo.edu.ucb.ingsoft.bot.chat.widgets.AbstractWidget;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Map;
@@ -51,6 +53,19 @@ public abstract class AbstractProcess {
         sendMessage.setText(sb.toString());
         try {
             bot.sendMyMessage(sendMessage);
+        } catch (Exception ex) {
+            // relanzamos la excepción
+            throw new RuntimeException(ex);
+        }
+    }
+
+    protected void sendPhotoB(MascotaLongPullingBot bot, Long chatId, String sb) {
+        SendPhoto sendMessage = new SendPhoto();
+        sendMessage.setChatId(chatId.toString());
+        sendMessage.setPhoto(new InputFile(sb));
+        sendMessage.setProtectContent(true);
+        try {
+            bot.execute(sendMessage);
         } catch (Exception ex) {
             // relanzamos la excepción
             throw new RuntimeException(ex);
