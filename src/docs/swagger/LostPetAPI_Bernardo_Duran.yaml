@@ -6,7 +6,7 @@ info:
 
 paths:
 
-  /pet/{userid}:
+  /pet/reportpet:
 
     ## Reporte de mascotas   
     get:
