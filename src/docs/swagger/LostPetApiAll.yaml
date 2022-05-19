@@ -1,0 +1,216 @@
+swagger: '2.0'
+info:
+  title: Mascotas API
+  description: Modelado de endpoins para la API de mascotas perdidas
+  version: 1.0.0
+
+paths:
+
+  /user:
+  
+    ### Informacion del usuario
+    get:
+      summary: Obtener información usuario
+      description: |
+        Obtener la información del usuario que ha iniciado sesión
+      parameters:
+      - name: userlogin
+        in: body
+        description: usuario y contraseña
+        required: true
+        schema: 
+          required:
+            - usermail
+            - hashpassword
+          properties:
+            usermail: 
+              type: string
+              example: example@gmail.com
+            hashpasword:
+              type: string
+              example: fads5f4a65f4ad65f4a65f4a6798e7wr8q7wer9q7wer87qr97
+      responses:
+        200:
+          description: Información del perfil
+          schema:             
+            $ref: '#/definitions/InfoProfile' 
+        400:
+          description: Solicitud invalida o usuario inexistente
+      produces:
+        - application/json
+    
+    ### Registrar usuario
+    post:
+      summary: Registrar nuevo usuario
+      description: |
+        Enviar una solicitud de registro de usuario
+      parameters:
+      - name: userinfo
+        in: body
+        description: Informacion del usuario al que se quiere registrar
+        required: true
+        schema: 
+          required:
+            - usermail
+            - hashpassword
+            - name
+            - lastname
+            - aditionalcontactinfo
+          properties:
+            usermail: 
+              type: string
+              example: example@gmail.com
+            hashpasword:
+              type: string
+              example: ra564ga654g87973167dfgassf
+            name:
+              type: string
+              example: Juan Paco Pedro
+            lastname:
+              type: string
+              example: De La Mar            
+            aditionalcontactinfo:
+              type: boolean
+              example: telefono 123456789
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+    
+    
+  /pet/{userid}:
+
+    ## Lista de mascotas   
+    get:
+      summary: Obtener la lista de mascotas registradas del usuario
+      description: |
+       Obtener la lista de mascotas del usuario que ha iniciado sesión
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Lista de mascotas registradas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PetList'
+        403:
+          description: No se pudo obtener la lista de mascotas
+      produces:
+        - application/json  
+    
+    ### Registrar una mascota a un usuario 
+    post:
+      summary: Registrar nueva mascota
+      description: |
+        Enviar una solicitud de registro de mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: petinfo
+        in: body
+        description: Informacion de la mascota que se quiere registrar
+        required: true
+        schema: 
+          required:
+            - petname
+            - petbreed
+            - petage
+            - petgender
+            - pettraits
+            - petcare
+            - petaditionalcontactinfo
+          properties:
+            petname: 
+              type: string
+              example: Señor Perro
+            petbreed:
+              type: string
+              example: Gato Persa
+            petage:
+              type: string
+              example: 1 año
+            petgender:
+              type: string
+              example: macho
+            pettraits:
+              type: string
+              example: Pelaje atigrado gris
+            petcare:
+              type: string
+              example: Gotas para los ojos
+            petaditionalcontactinfo:
+              type: boolean
+              example: telefono 23145679
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+
+definitions:
+  InfoProfile:
+    type: object
+    properties:
+      userid:
+        type: integer
+        example: 25
+      usermail:
+        type: string
+        example: example@gmail.com
+      name:
+        type: string
+        example: Juan Paco 
+      lastname:
+        type: string
+        example: Pedro D.LaMar
+      aditionalcontacts:
+        type: string
+        example: Telefono 123456789
+    
+  PetList:
+    type: object
+    required:
+    - userid
+    properties:
+      petid:
+        type: integer
+        example: 156
+      petname:
+        type: string
+        example: Señor Gato
+      petbreed:
+        type: string
+        example: Perro mestizo
+      petage:
+        type: string
+        example: 2 años
+      petgender:
+        type: string
+        example: Macho
+      pettraits:
+        type: string
+        example: Pelaje atigrado
+      petcare:
+        type: string
+        example: Ninguno
+      petaditionalcontactinfo:
+        type: string
+        example: Ninguno
+        

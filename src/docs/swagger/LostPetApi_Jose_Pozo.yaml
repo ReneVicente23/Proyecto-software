@@ -37,7 +37,7 @@ paths:
       consumes:
         - application/json
 
-    ### Obteniendo usuarios
+
 
   /user/{userid}:
     get:
@@ -81,7 +81,7 @@ paths:
     
   /user/zona{userid}:
 
-    ## Lista de mascotas   
+
     put:
       summary: Registrar la zona de residencia del usuario
       description:   |
@@ -133,7 +133,7 @@ paths:
 
 
 
-    ### Registrar una mascota a un usuario 
+  
     get:
       summary: Registro de la usuario con zona de residencia
       description: |
