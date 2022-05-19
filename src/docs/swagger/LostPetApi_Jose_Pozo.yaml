@@ -1,0 +1,252 @@
+swagger: '2.0'
+info:
+  title: Mascotas API
+  description: Modelado de endpoins para la API de mascotas perdidas
+  version: 1.0.0
+
+paths:
+
+  /user:
+    post:
+      summary: Busqueda de usuario
+      description: |
+        Buscando Usuario por correo electronico
+      parameters:
+      - name: usermail
+        in: body
+        description: Email del usuario
+        required: true
+        schema:
+          required:
+            - usermail
+          properties:
+            usermail:
+              type: string
+              example: email_pruba@gmail.com
+      responses:
+        200:
+          description: Busqueda Exitoso, se ha encontrado al usuario
+        400:
+          description: No se pudo encontrar al usuario
+      produces:
+        - application/json
+      consumes:
+        - application/json
+
+    ### Obteniendo usuarios
+
+  /user/{userid}:
+    get:
+      summary: Obtener usuario
+      description: |
+        Obtnener datos de usuario
+      parameters:
+      - name: username
+        in: body
+        description: datos del usuario
+        required: true
+        schema:
+          required:
+            - userName
+            - userLastName
+            - userEmergencyContac
+            - userTelegramContact
+          properties:
+            userName:
+              type: string
+              example: userName_example@gmail.com
+            userLastName:
+              type: string
+              example: userLastName_example@gmail.com
+            userEmergencyContac:
+              type: number
+              example: 77516627
+            userTelegramContact:
+              type: number
+              example: 65578478
+      responses:
+        200:
+          description: Informacion de perfil
+          schema:
+            $ref: '#/definitions/InfoProfile' 
+        400:
+          description: Usuario no Existe
+      produces:
+        - application/json
+    
+    
+  /user/zona{userid}:
+
+    ## Lista de mascotas   
+    post:
+      summary: Registrar la zona de residencia del usuario
+      description:   |
+        Registrar al usuario en una zona de la ciudad
+      parameters:
+      - name: userinfo
+        in: body
+        description: Informacion de residencia del usuario
+        
+        required: true
+        schema:
+          required:
+            - zona
+            - AvenidaCalle
+            - numero
+            - Referencia
+          properties:
+            zona:
+              type: string
+              example: Achumani
+            AvenidaCalle: 
+              type: string
+              example: Avenida The Strongest
+            numero:
+              type: number
+              example: 512
+            Referencia:
+              type: string
+              example: Frente al complejo del club The Strongest
+      responses:
+        200:
+          description: Solicitud de registro de zonas, correcto
+        403:
+          description: No se pudo registrar la zona de residencia
+      produces:
+        - application/json
+      consumes:
+        - application/json
+
+      
+
+
+    
+
+
+
+
+
+
+
+
+    ### Registrar una mascota a un usuario 
+    get:
+      summary: Registro de la usuario con zona de residencia
+      description: |
+        Enviar solicitud de obtnecion de datos de usuario
+      parameters:
+      - name: usuarioId
+        in: path
+        description: Datos de registro de Usuario
+        required: true
+        type: string
+      - name: datosDeUsuario
+        in: body
+        description: Informacion del usuario
+        required: true
+        schema: 
+          required:
+            - UsuarioEmail
+            - UsuarioName
+            - UsuarioLastName
+            - UsuarioEmergencyContact
+            - UsuarioTelegramContact
+            - UsuarioZona
+            - UsuarioDireccion
+            - UsuarioNumero
+            - UsuarioReferencia
+          properties:
+            UsuarioEmail:
+              type: string
+              example: jhosede23@gmail.com
+            UsuarioName: 
+              type: string
+              example: Jose Pozo
+            UsuarioLastName:
+              type: string
+              example: Pozo Silva
+            UsuarioEmergencyContact:
+              type: number
+              example: 65578478
+            UsuarioTelegramContact:
+              type: number
+              example: 65578478
+            UsuarioZona:
+              type: string
+              example: Achumani
+            UsuarioDireccion:
+              type: string
+              example: Avenida The Strongest
+            UsuarioNumero:
+              type: number
+              example: 512
+            UsuarioReferencia:
+              type: string
+              example: Frente al complejo del Club The Strongest
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+
+definitions:
+  InfoProfile:
+    type: object
+    properties:
+      userid:
+        type: integer
+        example: 001
+      usermail:
+        type: string
+        example: jhosede23@gmail.com
+      name:
+        type: string
+        example: Jose Armando
+      lastname:
+        type: string
+        example: Pozo Silva
+      UsuarioEmergencyContact:
+        type: number
+        example: 77516627
+      UsuarioTelegramContact:
+        type: number
+        example: 65578478
+      UsuarioZona:
+        type: string
+        example: Achumani
+      UsuarioDireccion:
+        type: string
+        example: Avenida The Strongest
+      UsuarioNumero:
+        type: number
+        example: 512
+      UsuarioReferencia:
+        type: string
+        example: Frente al complejo del Club The Strongest
+    
+  DireccionesList:
+    type: object
+    required:
+    - userid
+    properties:
+
+      userid:
+        type:  integer
+        example: 1
+      UsuarioZona:
+        type: string
+        example: Achumani
+      UsuarioDireccion:
+        type: string
+        example: Avenida The Strongest
+      UsuarioNumero:
+        type: number
+        example: 512
+      UsuarioReferencia:
+        type: string
+        example: Frente al complejo del Club The Strongest
+        
