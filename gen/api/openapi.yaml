@@ -1,0 +1,319 @@
+openapi: 3.0.1
+info:
+  description: Modelado de endpoins para la API de mascotas perdidas
+  title: Mascotas API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /user:
+    get:
+      description: |
+        Obtener la información del usuario que ha iniciado sesión
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          '*/*':
+            schema:
+              properties:
+                usermail:
+                  example: example@gmail.com
+                  type: string
+                hashpasword:
+                  example: fads5f4a65f4ad65f4a65f4a6798e7wr8q7wer9q7wer87qr97
+                  type: string
+              required:
+              - usermail
+              type: object
+        description: usuario y contraseña
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoProfile'
+          description: Información del perfil
+        "400":
+          content: {}
+          description: Solicitud invalida o usuario inexistente
+      summary: Obtener información usuario
+      x-codegen-request-body-name: userlogin
+      x-contentType: '*/*'
+      x-accepts: application/json
+    post:
+      description: |
+        Enviar una solicitud de registro de usuario
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
+        content:
+          application/json:
+            schema:
+              properties:
+                usermail:
+                  example: example@gmail.com
+                  type: string
+                hashpasword:
+                  example: ra564ga654g87973167dfgassf
+                  type: string
+                name:
+                  example: Juan Paco Pedro
+                  type: string
+                lastname:
+                  example: De La Mar
+                  type: string
+                aditionalcontactinfo:
+                  example: false
+                  type: boolean
+              required:
+              - aditionalcontactinfo
+              - lastname
+              - name
+              - usermail
+              type: object
+        description: Informacion del usuario al que se quiere registrar
+        required: true
+      responses:
+        "200":
+          content: {}
+          description: Solicitud de guardado exitosa
+        "403":
+          content: {}
+          description: No se pudo enviar la solicitud
+      summary: Registrar nuevo usuario
+      x-codegen-request-body-name: userinfo
+      x-contentType: application/json
+      x-accepts: application/json
+  /pet/{userid}:
+    get:
+      description: |
+        Obtener la lista de mascotas del usuario que ha iniciado sesión
+      parameters:
+      - description: Referencia de usuario
+        in: path
+        name: userid
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PetList'
+                type: array
+          description: Lista de mascotas registradas
+        "403":
+          content: {}
+          description: No se pudo obtener la lista de mascotas
+      summary: Obtener la lista de mascotas registradas del usuario
+      x-accepts: application/json
+    post:
+      description: |
+        Enviar una solicitud de registro de mascota
+      parameters:
+      - description: Referencia de usuario
+        in: path
+        name: userid
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
+        content:
+          application/json:
+            schema:
+              properties:
+                petname:
+                  example: Señor Perro
+                  type: string
+                petbreed:
+                  example: Gato Persa
+                  type: string
+                petage:
+                  example: 1 año
+                  type: string
+                petgender:
+                  example: macho
+                  type: string
+                pettraits:
+                  example: Pelaje atigrado gris
+                  type: string
+                petcare:
+                  example: Gotas para los ojos
+                  type: string
+                petaditionalcontactinfo:
+                  example: false
+                  type: boolean
+              required:
+              - petaditionalcontactinfo
+              - petage
+              - petbreed
+              - petcare
+              - petgender
+              - petname
+              - pettraits
+              type: object
+        description: Informacion de la mascota que se quiere registrar
+        required: true
+      responses:
+        "200":
+          content: {}
+          description: Solicitud de guardado exitosa
+        "403":
+          content: {}
+          description: No se pudo enviar la solicitud
+      summary: Registrar nueva mascota
+      x-codegen-request-body-name: petinfo
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  requestBodies:
+    inline_object_1:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+      required: true
+    inline_object:
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: true
+    inline_object_2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
+      required: true
+  schemas:
+    InfoProfile:
+      example:
+        aditionalcontacts: Telefono 123456789
+        name: Juan Paco
+        usermail: example@gmail.com
+        userid: 25
+        lastname: Pedro D.LaMar
+      properties:
+        userid:
+          example: 25
+          type: integer
+        usermail:
+          example: example@gmail.com
+          type: string
+        name:
+          example: Juan Paco
+          type: string
+        lastname:
+          example: Pedro D.LaMar
+          type: string
+        aditionalcontacts:
+          example: Telefono 123456789
+          type: string
+      type: object
+    PetList:
+      example:
+        petbreed: Perro mestizo
+        petgender: Macho
+        petaditionalcontactinfo: Ninguno
+        petid: 156
+        petname: Señor Gato
+        petage: 2 años
+        pettraits: Pelaje atigrado
+        petcare: Ninguno
+      properties:
+        petid:
+          example: 156
+          type: integer
+        petname:
+          example: Señor Gato
+          type: string
+        petbreed:
+          example: Perro mestizo
+          type: string
+        petage:
+          example: 2 años
+          type: string
+        petgender:
+          example: Macho
+          type: string
+        pettraits:
+          example: Pelaje atigrado
+          type: string
+        petcare:
+          example: Ninguno
+          type: string
+        petaditionalcontactinfo:
+          example: Ninguno
+          type: string
+      type: object
+    inline_object:
+      properties:
+        usermail:
+          example: example@gmail.com
+          type: string
+        hashpasword:
+          example: fads5f4a65f4ad65f4a65f4a6798e7wr8q7wer9q7wer87qr97
+          type: string
+      required:
+      - usermail
+      type: object
+    inline_object_1:
+      properties:
+        usermail:
+          example: example@gmail.com
+          type: string
+        hashpasword:
+          example: ra564ga654g87973167dfgassf
+          type: string
+        name:
+          example: Juan Paco Pedro
+          type: string
+        lastname:
+          example: De La Mar
+          type: string
+        aditionalcontactinfo:
+          example: false
+          type: boolean
+      required:
+      - aditionalcontactinfo
+      - lastname
+      - name
+      - usermail
+      type: object
+    inline_object_2:
+      properties:
+        petname:
+          example: Señor Perro
+          type: string
+        petbreed:
+          example: Gato Persa
+          type: string
+        petage:
+          example: 1 año
+          type: string
+        petgender:
+          example: macho
+          type: string
+        pettraits:
+          example: Pelaje atigrado gris
+          type: string
+        petcare:
+          example: Gotas para los ojos
+          type: string
+        petaditionalcontactinfo:
+          example: false
+          type: boolean
+      required:
+      - petaditionalcontactinfo
+      - petage
+      - petbreed
+      - petcare
+      - petgender
+      - petname
+      - pettraits
+      type: object
+x-original-swagger-version: "2.0"
+

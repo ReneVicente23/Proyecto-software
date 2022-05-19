@@ -1,0 +1,135 @@
+swagger: '2.0'
+info:
+  title: Mascotas API
+  description: Modelado de endpoins para la API de mascotas perdidas
+  version: 1.0.0
+
+paths:
+
+  /pet/{userid}:
+
+    ## Reporte de mascotas   
+    get:
+      summary: Obtener reporte de mascotas
+      description: |
+       Obtener el reporte de mascotas
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Reporte de mascotas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PetList'
+        403:
+          description: No se pudo obtener el reporte de mascotas
+      produces:
+        - application/json  
+    
+    ### Registrar una mascota a un usuario 
+    post:
+      summary: Registrar nueva mascota
+      description: |
+        Enviar una solicitud de registro de mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: petinfo
+        in: body
+        description: Informacion de la mascota que se quiere registrar
+        required: true
+        schema: 
+          required:
+            - petname
+            - petbreed
+            - petage
+            - petgender
+            - pettraits
+            - petcare
+            - petaditionalcontactinfo
+          properties:
+            petname: 
+              type: string
+              example: Beily
+            petbreed:
+              type: string
+              example: Sharpei
+            petage:
+              type: string
+              example: 2 año
+            petgender:
+              type: string
+              example: macho
+            pettraits:
+              type: string
+              example: Pelaje color Beige
+            petcare:
+              type: string
+              example: Ninguno
+            petaditionalcontactinfo:
+              type: integer
+              example: 77498079
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+
+definitions:
+  InfoProfile:
+    type: object
+    properties:
+      userid:
+        type: integer
+        example: 12
+      usermail:
+        type: string
+        example: example@gmail.com
+      name:
+        type: string
+        example: Bernardo
+      lastname:
+        type: string
+        example: Duran
+      aditionalcontacts:
+        type: integer
+        example: 75649768
+    
+  PetList:
+    type: object
+    required:
+    - userid
+    properties:
+      petname:
+        type: string
+        example: Beily
+      petgender:
+        type: string
+        example: Macho
+      petage:
+        type: string
+        example: 2 años
+      petbreed:
+        type: string
+        example: Sharpei
+      petid:
+        type: integer
+        example: 123
+      petfound:
+        type: boolean
+        example: true(encontrado)/false(Perdido)
+
+    
+        
