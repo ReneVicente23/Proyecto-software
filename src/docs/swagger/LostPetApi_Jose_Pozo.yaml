@@ -82,7 +82,7 @@ paths:
   /user/zona{userid}:
 
     ## Lista de mascotas   
-    post:
+    put:
       summary: Registrar la zona de residencia del usuario
       description:   |
         Registrar al usuario en una zona de la ciudad
