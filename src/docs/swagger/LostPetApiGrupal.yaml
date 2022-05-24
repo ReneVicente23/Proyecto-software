@@ -1,3 +1,5 @@
+
+   
 swagger: '2.0'
 info:
   title: Mascotas API
@@ -12,8 +14,12 @@ tags:
     description: "Administracion de usuarios"
   - name: "pet"
     description: "Administracion de mascotas respecto a un usuario"
+  - name: "neigh"
+    description: "Registrarse en grupos de zonas"
 
 paths:
+
+
   /auth:
     ### Informacion del usuario
     post:
@@ -385,7 +391,60 @@ paths:
       consumes:        
         - application/json 
         
+        
+  /user/{userid}:
+     get:
+      tags:
+      - "neigh"
+      summary: Obtener datos del usuario
+      description: |
+       Obtener datos del usuario
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Lista de mascotas registradas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserList'
+        403:
+          description: No se pudo obtener la lista de mascotas
+      produces:
+        - application/json 
+      
+      
+      
+      
+      
+      
+        
 definitions:
+
+
+
+
+
+
+  UserList:
+    type: object
+    required: 
+    - userid
+    - username
+    properties:
+      userid:
+        type: integer
+        example: 125
+      username:
+        type: string
+        example: Juan
+      userlastname:
+        type: string
+        example: Paco
   InfoProfile:
     type: object
     properties:
@@ -401,6 +460,14 @@ definitions:
       aditionalcontacts:
         type: string
         example: Telefono 123456789
+        
+        
+        
+        
+        
+        
+        
+        
     
   PetList:
     type: object
