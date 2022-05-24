@@ -580,6 +580,56 @@ paths:
           description: No se pudo obtener la lista de mascotas perdidas en esta zona
       produces:
         - application/json
+
+### Modifacar datos del usuaio
+  /user/change/{userid}:
+    put:  
+      tags:
+        - "user"
+      summary: Modificar los datos del usuario
+      description: |
+        modifiar datos de un usuario especifico
+      parameters:
+        - name: userid
+          in: path
+          description: Datos del Usuario
+          required: true
+          type: integer
+        - name: userid
+          in: body
+          description: Nuevos datos del usuario
+          required: true
+          schema:
+            required:
+              - username
+              - userlastname
+              - contraseña
+              - contactos
+            properties:
+              username:
+                type: string
+                example: Felipe
+              userlastname:
+                type: string
+                example: Gonzales
+              contraseña:
+                type: string
+                example: nueva
+              contactos:
+                type: string
+                example: 77454545
+      responses:
+          200:
+            description: modificacion de datos del usuario exitosa
+          400: 
+            description: error en la sintaxis 
+          504: 
+            description: Eror, Tiempo de espera agotado 
+      produces:
+          - application/json
+      consumes:
+          - application/json
+
   
 definitions:
 
