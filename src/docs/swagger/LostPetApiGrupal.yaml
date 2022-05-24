@@ -390,7 +390,6 @@ paths:
       consumes:        
         - application/json 
         
-        
   /user/{userid}:
      get:
       tags:
@@ -519,6 +518,38 @@ paths:
           description: No se pudo obtener la lista de mascotas perdidas en esta zona
       produces:
         - application/json
+
+  /user/{userid}/pet/{idpet}/petfound:
+
+    ## Mascotas encontradas   
+    get:
+      tags:
+      - "pet"
+      summary: Obtener la lista de mascotas encontradas
+      description: |
+       Obtener la lista de mascotas encontradas
+      parameters:
+      - name: idpet
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Mascotas encontradas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/petfound'
+        403:
+          description: No exite mascotas encontradas
+      produces:
+        - application/json
      
 definitions:
 
@@ -543,6 +574,39 @@ definitions:
       useradditionalcontacts:
         type: number
         example: 77777777
+
+  petfound:
+    type: object
+    required:
+    - userid
+    properties:
+      petname:
+        type: string
+        example: Beily
+      petbreed:
+        type: string
+        example: Sharpei
+      petage:
+        type: string
+        example: 2 años
+      petgender:
+        type: string
+        example: Macho
+      pettraits:
+        type: string
+        example: Beige
+      petzone:
+        type: string
+        example: Sopocachi
+      petfoundnameperson:
+        type: string
+        example: Ricardo Lopez
+      petfoundday:
+        type: string
+        example: 14/07/2022
+      petfoundhour:
+        type: string
+        example: 14:07
 
   NeighborsList:
     type: object
