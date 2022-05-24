@@ -1,0 +1,443 @@
+swagger: '2.0'
+info:
+  title: Mascotas API
+  description: Modelado de endpoins para la API de mascotas perdidas
+  version: 1.0.0
+
+
+tags:
+  - name: "auth"
+    description: "Autenticacion de usuarios"
+  - name: "user"
+    description: "Administracion de usuarios"
+  - name: "pet"
+    description: "Administracion de mascotas respecto a un usuario"
+
+paths:
+  /auth:
+    ### Informacion del usuario
+    post:
+      tags:
+        - "auth"
+      summary: Autenticar al usuario
+      description: |
+        Autenticar al usuario que ha iniciado sesión
+      parameters:
+      - name: userlogin
+        in: body
+        description: usuario y contraseña
+        required: true
+        schema: 
+          required:
+            - usermail
+            - hashpassword
+          properties:
+            usermail: 
+              type: string
+              example: example@gmail.com
+            hashpasword:
+              type: string
+              example: fads5f4a65f4ad65f4a65f4a6798e7wr8q7wer9q7wer87qr97
+      responses:
+        200:
+          description: Información del perfil
+          schema:             
+            $ref: '#/definitions/InfoProfile' 
+        401:
+          description: Usuario o contraseña incorrecto
+      produces:
+        - application/json
+  
+  /user:
+    ### Registrar usuario
+    post:
+      tags:
+      - "user"
+      summary: Registrar nuevo usuario
+      description: |
+        Enviar una solicitud de registro de usuario
+      parameters:
+      - name: userinfo
+        in: body
+        description: Informacion del usuario al que se quiere registrar
+        required: true
+        schema: 
+          required:
+            - usermail
+            - hashpassword
+            - name
+            - lastname
+            - aditionalcontactinfo
+          properties:
+            usermail: 
+              type: string
+              example: example@gmail.com
+            hashpasword:
+              type: string
+              example: ra564ga654g87973167dfgassf
+            name:
+              type: string
+              example: Juan Paco Pedro
+            lastname:
+              type: string
+              example: De La Mar            
+            aditionalcontactinfo:
+              type: boolean
+              example: telefono 123456789
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+    
+    
+  /user/{userid}/pet:
+
+    ## Lista de mascotas   
+    get:
+      tags:
+      - "pet"
+      summary: Obtener la lista de mascotas registradas del usuario
+      description: |
+       Obtener la lista de mascotas del usuario que ha iniciado sesión
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Lista de mascotas registradas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PetList'
+        403:
+          description: No se pudo obtener la lista de mascotas
+      produces:
+        - application/json 
+    
+    ### Registrar una mascota a un usuario 
+    post:
+      tags:
+      - "pet"
+      summary: Registrar nueva mascota
+      description: |
+        Enviar una solicitud de registro de mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: petinfo
+        in: body
+        description: Informacion de la mascota que se quiere registrar
+        required: true
+        schema: 
+          required:
+            - petname
+            - petbreed
+            - petage
+            - petgender
+            - pettraits
+            - petcare
+            - petaditionalcontactinfo
+          properties:
+            petname: 
+              type: string
+              example: Señor Perro
+            petbreed:
+              type: string
+              example: Gato Persa
+            petage:
+              type: string
+              example: 1 año
+            petgender:
+              type: string
+              example: macho
+            pettraits:
+              type: string
+              example: Pelaje atigrado gris
+            petcare:
+              type: string
+              example: Gotas para los ojos
+            petaditionalcontactinfo:
+              type: boolean
+              example: telefono 23145679
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+        
+      
+  /user/{userid}/pet/{idpet}:  
+    
+    ## Obtener una mascota especifica   
+    get:
+      tags:
+      - "pet"
+      summary: Obtener una mascota especifica registrada al usuario
+      description: |
+        Obtener una mascota especifica registrada al usuario que ha iniciado sesión
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Referencia de la mascota del usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Lista de mascotas registradas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PetList'
+        403:
+          description: No se pudo obtener la mascota
+      produces:
+        - application/json
+  
+    ### Modificar una mascota de un usuario 
+    put:
+      tags:
+      - "pet"
+      summary: Modificar una mascota
+      description: |
+        Enviar una solicitud de modificacion de una mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Referencia de la mascota del usuario
+        required: true
+        type: integer
+      - name: petinfo
+        in: body
+        description: Informacion de la mascota que se quiere reescribir
+        required: true
+        schema: 
+          required:
+            - petname
+            - petbreed
+            - petage
+            - petgender
+            - pettraits
+            - petcare
+            - petaditionalcontactinfo
+          properties:
+            petname: 
+              type: string
+              example: Señor Perro
+            petbreed:
+              type: string
+              example: Gato Persa
+            petage:
+              type: string
+              example: 1 año
+            petgender:
+              type: string
+              example: macho
+            pettraits:
+              type: string
+              example: Pelaje atigrado gris
+            petcare:
+              type: string
+              example: Gotas para los ojos
+            petaditionalcontactinfo:
+              type: boolean
+              example: telefono 23145679
+      responses:
+        200:
+          description: Actualizacion exitosa
+        403:
+          description: No se pudo completar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+
+  /user/{userid}/pet/{idpet}/image:
+    ## Imagen de una mascota
+    get:
+      tags:
+      - "pet"
+      summary: Obtener la imagen asociada a un registro de mascota
+      description: |
+       Obtener la URL de imagen asociada a un registro de mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Referencia de la mascota del usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: URL imagen
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PetImage'
+        403:
+          description: No se pudo obtener la imagen de la mascota
+      produces:
+        - application/json  
+    
+    ### Registrar una mascota a un usuario 
+    post:
+      tags:
+      - "pet"
+      summary: Registrar una imagen a una mascota
+      description: |
+        Enviar una solicitud de registro de imagen de una mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Referencia de la mascota del usuario
+        required: true
+        type: integer
+      - name: petimage
+        in: body
+        description: Imagen de la mascota que se quiere registrar
+        required: true
+        schema: 
+          required:
+            - petimage
+          properties:
+            petimage:
+              type: string
+              example: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.webconsultas.com%2Fnoticias%2Fmascotas%2Fque-mascotas-prefieren-los-espanoles&psig=AOvVaw1Q5XIcgGjffHEVAqebFQ_-&ust=1653437078774000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPDA_KDr9vcCFQAAAAAdAAAAABAD
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+        
+### Modificar la imagen de una mascota
+    put:
+      tags:
+      - "pet"
+      summary: Modificar la imagen de una mascota
+      description: |
+        Enviar una solicitud de modificacion de una mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Referencia de la mascota del usuario
+        required: true
+        type: integer
+      - name: petimage
+        in: body
+        description: Nueva URL de la imagen de una mascota
+        required: true
+        schema: 
+          required:
+            - petname
+          properties:
+            petname: 
+              type: string
+              example: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.webconsultas.com%2Fnoticias%2Fmascotas%2Fque-mascotas-prefieren-los-espanoles&psig=AOvVaw1Q5XIcgGjffHEVAqebFQ_-&ust=1653437078774000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPDA_KDr9vcCFQAAAAAdAAAAABAD
+      responses:
+        200:
+          description: Actualizacion exitosa
+        403:
+          description: No se pudo completar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+        
+definitions:
+  InfoProfile:
+    type: object
+    properties:
+      userid:
+        type: integer
+        example: 25
+      name:
+        type: string
+        example: Juan Paco 
+      lastname:
+        type: string
+        example: Pedro D.LaMar
+      aditionalcontacts:
+        type: string
+        example: Telefono 123456789
+    
+  PetList:
+    type: object
+    required:
+    - userid
+    properties:
+      petid:
+        type: integer
+        example: 156
+      petname:
+        type: string
+        example: Señor Gato
+      petbreed:
+        type: string
+        example: Perro mestizo
+      petage:
+        type: string
+        example: 2 años
+      petgender:
+        type: string
+        example: Macho
+      pettraits:
+        type: string
+        example: Pelaje atigrado
+      petcare:
+        type: string
+        example: Ninguno
+      petaditionalcontactinfo:
+        type: string
+        example: Ninguno
+  PetImage:
+    type: object
+    required:
+    - userid
+    - idpet
+    properties:
+      petimageurl:
+        type: string
+        example: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.webconsultas.com%2Fnoticias%2Fmascotas%2Fque-mascotas-prefieren-los-espanoles&psig=AOvVaw1Q5XIcgGjffHEVAqebFQ_-&ust=1653437078774000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPDA_KDr9vcCFQAAAAAdAAAAABAD"
+        
