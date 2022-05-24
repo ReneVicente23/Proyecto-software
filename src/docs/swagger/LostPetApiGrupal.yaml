@@ -1,11 +1,9 @@
 
-   
 swagger: '2.0'
 info:
   title: Mascotas API
   description: Modelado de endpoins para la API de mascotas perdidas
   version: 1.0.0
-
 
 tags:
   - name: "auth"
@@ -16,6 +14,7 @@ tags:
     description: "Administracion de mascotas respecto a un usuario"
   - name: "neigh"
     description: "Registrarse en grupos de zonas"
+  - name: "lostPetList"
 
 paths:
 
@@ -416,19 +415,112 @@ paths:
           description: No se pudo obtener la lista de mascotas
       produces:
         - application/json 
-      
-      
-      
-      
-      
-      
-        
+
+  /user/{userid}/neigh:
+    post:
+      tags:
+        - "neigh"
+      summary: Registrarse en un grupo de la zona
+      description: |
+        Enviar una solicitud d registro a un grupo de Telegram de una zona 
+      parameters:
+      - name: userid
+        in: path
+        description: grupo de Telegram
+        required: true
+        type: integer
+      - name: neighid
+        in: body
+        description: Zona a la que se quiere unir
+        required: true
+        schema:
+          required:
+            - zona
+            - calle_avenida
+            - numero
+          properties:
+            zona:
+              type: string
+              example: Achumani
+            calle_avenida:
+              type: string 
+              example: Avenida The Strongest
+            numero:
+              type: number
+              example: 512
+      responses:
+        200:
+          description: Solicitud de registo en grupo exitoso
+        403:
+          description: No se pudo enviar la solicitud
+        505:
+          description: Tiempo de espera al servidor agotado
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+
+  /user/{userid}/neigh/{neighid}:
+    get: 
+      tags:
+      - "neigh"
+      summary: Obtener la zona donde el usuario esta registrado
+      description: |
+        Obtener una zona especifica donde el usuario se registro
+      parameters:
+        - name: userid
+          in: path
+          description: Datos del usuario
+          required: true
+          type: integer
+        - name: neighid
+          in: path
+          description: Datos de la zona
+          required: true
+          type: integer
+      responses:
+        200:
+          description: List de usuario registrados en zonas"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NeighborsList'
+        400:
+          description: No se pudo obtener la zona en la que el usuario se registro
+      produces:
+        - application/json
+
+  /lostPetList{lostPetListId}/{neighid}/{idpet}:
+    get:
+      tags:
+        - "lostPetList"
+      summary: Obtener el reporte de mascotas perdidas por zonas
+      description: |
+        Obtener la lista de mascotas perdidas en una zona especifica
+      parameters:
+      - name: neighid
+        in: path
+        description: Datos de la zona
+        required: true
+        type: integer
+      - name: neighid
+        in: path
+        description: Datos de la mascota
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Lista de mascotas perdidas por zonas
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/lostpetlist'
+        400:
+          description: No se pudo obtener la lista de mascotas perdidas en esta zona
+      produces:
+        - application/json
+     
 definitions:
-
-
-
-
-
 
   UserList:
     type: object
@@ -445,6 +537,97 @@ definitions:
       userlastname:
         type: string
         example: Paco
+      usermail:
+        type: string 
+        example: juanpaco@gmail.com
+      useradditionalcontacts:
+        type: number
+        example: 77777777
+
+  NeighborsList:
+    type: object
+    required:
+    - name
+    - lastname
+    - correo
+    - contacto
+    - zona
+    - calle_avenida
+    - numero
+    properties:
+      name:
+        type: string
+        example: juan
+      lastname:
+        type: string
+        example: Paco
+      correo:
+        type: string
+        example: juanpaco@gmail.com
+      contacto:
+        type: number
+        example: 777777777
+      zona:
+        type: string
+        example: Achumani
+      calle_avenida:
+        type: string
+        example: Avenida The Strongest
+      numero: 
+        type: number
+        example: 512
+
+
+  lostpetlist:
+    type: object
+    required:
+    - idpet
+    - petname
+    - raza
+    - neighid
+    - zonaExtravio
+    - petage
+    - petSex
+    - petColor
+    - FechaExtravio
+    - HoraExtravio
+    - PersonaQuienReporto
+    properties:
+      idpet:
+        type: integer
+        example: 452
+      petname:
+        type: string
+        example: Asgard
+      raza:
+        type: string
+        example: Caracachan
+      neighid:
+        type: integer
+        example: 145
+      zonaExtravio:
+        type: string
+        example: Bajo Llojeta
+      petage:
+        type: string
+        example: 1 año
+      petSex:
+        type: string
+        example: macho
+      petColor:
+        type: string
+        example: Blanco con Negro
+      FechaExtravio:
+        type: string
+        example: 10 de septiembre de 2021
+      HoraExtravio:
+        type: string
+        example: 10:30 AM
+      PersonaQuienReporto:
+        type: string
+        example: Jose Pozo
+      
+  
   InfoProfile:
     type: object
     properties:
@@ -460,15 +643,7 @@ definitions:
       aditionalcontacts:
         type: string
         example: Telefono 123456789
-        
-        
-        
-        
-        
-        
-        
-        
-    
+     
   PetList:
     type: object
     required:
