@@ -550,7 +550,37 @@ paths:
           description: No exite mascotas encontradas
       produces:
         - application/json
-     
+
+  /user/{userid}/pet/{idpet}/reportpet:
+    get:
+      tags:
+        - "pet"
+      summary: Obtener el reporte de mascotas perdidas
+      description: |
+        Obtener el reporte de mascotas perdidas
+      parameters:
+      - name: idpet
+        in: path
+        description: Datos de la mascota
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Datos de la mascota
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Reporte de mascotas perdidas
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/reportpet'
+        400:
+          description: No se pudo obtener la lista de mascotas perdidas en esta zona
+      produces:
+        - application/json
+  
 definitions:
 
   UserList:
@@ -607,6 +637,42 @@ definitions:
       petfoundhour:
         type: string
         example: 14:07
+
+  reportpet:
+    type: object
+    required:
+    - idpet
+    properties:
+      petname:
+        type: string
+        example: Beily
+      petbreed:
+        type: string
+        example: Sharpei
+      petage:
+        type: string
+        example: 2 años
+      petgender:
+        type: string
+        example: Macho
+      featurespet:
+        type: string
+        example: Pelaje color beige con blanco
+      specialpet:
+        type: string
+        example: Usa Gotas para los ojos cada 12 horas por operacion reciente
+      petcontact:
+        type: integer
+        example: 76897625
+      petzone:
+        type: string
+        example: obrajes
+      petfoundday:
+        type: string
+        example: 14/07/2022
+      petfoundnameperson:
+        type: string
+        example: Ricardo Lopez
 
   NeighborsList:
     type: object
