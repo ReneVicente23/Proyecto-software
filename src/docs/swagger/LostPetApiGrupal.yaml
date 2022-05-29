@@ -513,7 +513,7 @@ paths:
       produces:
         - application/json
 
-  /user/{userid}/pet/{idpet}/petfound:
+  /user/{userid}/petfound/pet/{idpet}:
 
     ## Mascotas encontradas   
     get:
@@ -545,7 +545,128 @@ paths:
       produces:
         - application/json
 
-  /user/{userid}/pet/{idpet}/reportpet:
+  /user/{userid}/petfound/pet/{idpet}/image:
+
+    ## Imagen de una mascota encontrada
+    get:
+      tags:
+      - "pet"
+      summary: Obtener imagen de mascota registrada como encontrada
+      description: |
+       Obtener la URL de la imagen de mascota registrada como encontrada
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: idpet
+        in: path
+        description: Referencia de la mascota del usuario
+        required: true
+        type: integer
+      responses:
+        200:
+          description: imagen
+          schema:
+            type: string
+            example: /9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQUFBQUGBgUICAcICAsKCQkKCxEMDQwNDBEaEBMQEBMQGhcbFhUWGxcpIBwcICkvJyUnLzkzMzlHREddXX0BBQUFBQUFBQYGBQgIBwgICwoJCQoLEQwNDA0MERoQExAQExAaFxsWFRYbFykgHBwgKS8nJScvOTMzOUdER11dff/CABEIAccC2AMBIQACEQEDEQH/xAAcAAACAwEBAQE...
+            
+        403:
+          description: No se pudo obtener la imagen de la mascota encontrada
+      produces:
+        - multipart/form-data
+
+  /user/{userid}/sightingreport:
+  
+  ### Registrar reporte de avistamiento a un usuario 
+    post:
+      tags:
+      - "pet"
+      summary: Registrar reporte de avistamiento mascota
+      description: |
+        Enviar una solicitud de reporte de avistamiento de mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: personinfo
+        in: body
+        description: Informacion de la persona que quiere registrar avistamiento
+        required: true
+        schema: 
+          required:
+            - personname
+            - personphone
+            - personemail
+            - personzone
+            - personbreed
+            - persondescription
+          properties:
+            personname: 
+              type: string
+              example: Bernardo Duran
+            personphone:
+              type: boolean
+              example: telefono 23145679
+            personemail:
+              type: string
+              example: bernardo.duran@gmail.com
+            personzone:
+              type: string
+              example: obrajes
+            personbreed:
+              type: string
+              example: Sharpei
+            persondescription:
+              type: string
+              example: Se lo vio en la calle 2 de obrajes un Sharpei Beige con correa roja, estaba solo.
+      responses:
+        200:
+          description: Solicitud de registro exitoso
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - application/json        
+      consumes:        
+        - application/json 
+  
+  /user/{userid}/sightingreport/{sightingreportid}/image:
+
+  ### Registrar una imagen a una mascota de un usuario 
+    post:
+      tags:
+      - "pet"
+      summary: Registro de una imagen a un reporte de avistamiento
+      description: |
+        Enviar una solicitud de registro de imagen a un avistamiento de mascota
+      parameters:
+      - name: userid
+        in: path
+        description: Referencia de usuario
+        required: true
+        type: integer
+      - name: file
+        in: formData  
+        description: The uploaded file data
+        required: true
+        type: file     
+      responses:
+        200:
+          description: Solicitud de guardado exitosa
+        403:
+          description: No se pudo enviar la solicitud
+      produces:
+        - multipart/form-data        
+      consumes:        
+        - multipart/form-data
+  
+
+  /user/{userid}/reportpet/pet/{idpet}:
+
+    ## Reporte de mascotas perdidas
     get:
       tags:
         - "pet"
