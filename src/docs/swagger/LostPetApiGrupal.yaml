@@ -12,7 +12,7 @@ tags:
     description: "Administracion de usuarios"
   - name: "pet"
     description: "Administracion de mascotas respecto a un usuario"
-  - name: " neighbor"
+  - name: "neigh"
     description: "Registrarse en grupos de zonas"
   - name: "lostPetList"
 
