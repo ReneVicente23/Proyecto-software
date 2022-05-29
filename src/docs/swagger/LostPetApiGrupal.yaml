@@ -302,17 +302,18 @@ paths:
         type: integer
       responses:
         200:
-          description: URL imagen
+          description: imagen
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/PetImage'
+            type: string
+            example: /9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQUFBQUGBgUICAcICAsKCQkKCxEMDQwNDBEaEBMQEBMQGhcbFhUWGxcpIBwcICkvJyUnLzkzMzlHREddXX0BBQUFBQUFBQYGBQgIBwgICwoJCQoLEQwNDA0MERoQExAQExAaFxsWFRYbFykgHBwgKS8nJScvOTMzOUdER11dff/CABEIAccC2AMBIQACEQEDEQH/xAAcAAACAwEBAQE...
+            
         403:
           description: No se pudo obtener la imagen de la mascota
       produces:
-        - application/json  
+        - multipart/form-data
+ 
     
-    ### Registrar una mascota a un usuario 
+    ### Registrar una imagen a una mascota de un usuario 
     post:
       tags:
       - "pet"
@@ -330,26 +331,20 @@ paths:
         description: Referencia de la mascota del usuario
         required: true
         type: integer
-      - name: petimage
-        in: body
-        description: Imagen de la mascota que se quiere registrar
+      - name: file
+        in: formData  
+        description: The uploaded file data
         required: true
-        schema: 
-          required:
-            - petimage
-          properties:
-            petimage:
-              type: string
-              example: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.webconsultas.com%2Fnoticias%2Fmascotas%2Fque-mascotas-prefieren-los-espanoles&psig=AOvVaw1Q5XIcgGjffHEVAqebFQ_-&ust=1653437078774000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPDA_KDr9vcCFQAAAAAdAAAAABAD
+        type: file     
       responses:
         200:
           description: Solicitud de guardado exitosa
         403:
           description: No se pudo enviar la solicitud
       produces:
-        - application/json        
+        - multipart/form-data        
       consumes:        
-        - application/json 
+        - multipart/form-data
         
 ### Modificar la imagen de una mascota
     put:
@@ -369,26 +364,20 @@ paths:
         description: Referencia de la mascota del usuario
         required: true
         type: integer
-      - name: petimage
-        in: body
-        description: Nueva URL de la imagen de una mascota
+      - name: file
+        in: formData  
+        description: The uploaded file data
         required: true
-        schema: 
-          required:
-            - petname
-          properties:
-            petname: 
-              type: string
-              example: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.webconsultas.com%2Fnoticias%2Fmascotas%2Fque-mascotas-prefieren-los-espanoles&psig=AOvVaw1Q5XIcgGjffHEVAqebFQ_-&ust=1653437078774000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPDA_KDr9vcCFQAAAAAdAAAAABAD
+        type: file     
       responses:
         200:
           description: Actualizacion exitosa
         403:
           description: No se pudo completar la solicitud
       produces:
-        - application/json        
+        - multipart/form-data 
       consumes:        
-        - application/json 
+        - multipart/form-data 
         
   /user/{userid}:
      get:
@@ -497,12 +486,17 @@ paths:
       description: |
         Obtener la lista de mascotas perdidas en una zona especifica
       parameters:
+      - name: lostPetListId
+        in: path
+        description: lost pet id
+        required: true
+        type: integer
       - name: neighid
         in: path
         description: Datos de la zona
         required: true
         type: integer
-      - name: neighid
+      - name: idpet
         in: path
         description: Datos de la mascota
         required: true
@@ -529,7 +523,7 @@ paths:
       description: |
        Obtener la lista de mascotas encontradas
       parameters:
-      - name: idpet
+      - name: userid
         in: path
         description: Referencia de usuario
         required: true
@@ -559,7 +553,7 @@ paths:
       description: |
         Obtener el reporte de mascotas perdidas
       parameters:
-      - name: idpet
+      - name: userid
         in: path
         description: Datos de la mascota
         required: true
@@ -853,13 +847,3 @@ definitions:
       petaditionalcontactinfo:
         type: string
         example: Ninguno
-  PetImage:
-    type: object
-    required:
-    - userid
-    - idpet
-    properties:
-      petimageurl:
-        type: string
-        example: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.webconsultas.com%2Fnoticias%2Fmascotas%2Fque-mascotas-prefieren-los-espanoles&psig=AOvVaw1Q5XIcgGjffHEVAqebFQ_-&ust=1653437078774000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPDA_KDr9vcCFQAAAAAdAAAAABAD"
-        
