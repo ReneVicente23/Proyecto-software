@@ -17,6 +17,11 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+		<!-- Dependencias para web rest -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<!-- Dependencias para telegram -->
 		<dependency>
 			<groupId>org.telegram</groupId>

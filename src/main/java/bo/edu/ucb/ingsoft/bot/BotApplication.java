@@ -25,6 +25,7 @@ public class BotApplication {
 	}
 
 	public static void main(String[] args) {
+		/* //Funcionalidad del bot
 		ApplicationContext context = SpringApplication.run(BotApplication.class, args);
 		try {
 			// Inicializamos libreria de bots
@@ -34,6 +35,9 @@ public class BotApplication {
 		} catch (TelegramApiException e) {
 			e.printStackTrace();
 		}
+		*/
+		//funcionalidad rest
+		SpringApplication.run(BotApplication.class, args);
 	}
 
 }
