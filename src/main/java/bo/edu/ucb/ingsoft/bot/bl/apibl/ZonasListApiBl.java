@@ -13,28 +13,9 @@ public class ZonasListApiBl {
     private ZonasListApiDao zonasListApiDao;
 
 
-    @Autowired
-    public ZonasListApiBl(ZonasListApiDao zonasListApiDao){
-        this.zonasListApiDao = zonasListApiDao;
 
-        public List<ZonasListApiDto> findZonas(Integer zonasid){
-            int limit=5,offset=0, flag=0;
-            List<ZonasListApiDto> result=new ArrayList<~>();
-            while (flg==0){
-                try{
-                    result.addAll(ZonasApiDao.findZonas(zonasid, limits, (offers*limit)));
-                }
             }
 
-        }
-    }
 
 
 
-
-
-
-
-
-
-}

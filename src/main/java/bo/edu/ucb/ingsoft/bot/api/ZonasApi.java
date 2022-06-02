@@ -31,10 +31,6 @@ public class ZonasApi {
 
 
 
-    @PostMapping(path = "/{userid}zona/", produces = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public InZonasApiDto registrozona(@ResponseBody InUserApiDto inUserApiDto){
-        zonasListApiBl.saveZona(inUserApiDto);
-        return inUserApiDto;
-    }
+
 
 }
