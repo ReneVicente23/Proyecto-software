@@ -12,8 +12,8 @@ import java.util.List;
 @Service
 public interface PetListApiDao {
     @Select("SELECT p.pet_id, p.pet_name, p.pet_tipe, p.pet_age, p.pet_gender,p.pet_stat, p.pet_care, p.pet_contacts, p.state ,p.mod_user, p.mod_date, p.usuario_id_usuario, p.image_idimage " +
-            "FROM pet p JOIN usuario u  ON p.usuario_id_usuario = u.id_usuario WHERE u.id_usuario = #{userid} AND p.state = 1")
-    public List<PetListApiDto> findPets(@Param("userid") Integer id);
+            "FROM pet p JOIN usuario u  ON p.usuario_id_usuario = u.id_usuario WHERE u.id_usuario = #{userid} AND p.state = 1 ORDER BY p.pet_id LIMIT #{limit} OFFSET #{offset}")
+    public List<PetListApiDto> findPets(@Param("userid") Integer id,@Param("limit") Integer limit,@Param("offset") Integer offset);
 
     @Select("SELECT p.pet_id, p.pet_name, p.pet_tipe, p.pet_age, p.pet_gender,p.pet_stat, p.pet_care, p.pet_contacts, p.state ,p.mod_user, p.mod_date, p.usuario_id_usuario, p.image_idimage " +
             "FROM pet p JOIN usuario u  ON p.usuario_id_usuario = u.id_usuario WHERE u.id_usuario = #{userid} AND p.state = 1 AND p.pet_id = #{petid}")

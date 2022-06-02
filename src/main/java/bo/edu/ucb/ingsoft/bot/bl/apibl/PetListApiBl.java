@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +23,19 @@ public class PetListApiBl {
     }
 
     public List<PetListApiDto> findPets(Integer userid) {
-        List<PetListApiDto> result =petListApiDao.findPets(userid);
+        int limit=5,offset=0,flg=0;
+        List<PetListApiDto> result=new ArrayList<PetListApiDto>();
+        while (flg==0){
+            try{
+                result.addAll(petListApiDao.findPets(userid,limit,(offset*limit)));
+                offset++;
+                if(result.size()<(offset*limit)){
+                    flg=1;
+                }
+            }catch (NullPointerException e){
+                flg=1;
+            }
+        }
         return result;
     }
 
