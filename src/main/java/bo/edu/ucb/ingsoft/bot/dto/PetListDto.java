@@ -14,7 +14,8 @@ public class PetListDto {
     private Integer state;
     private String mod_user;
     private Date mod_date;
-    private Integer Ususario_id_usuario;
+    private Integer ususario_id_usuario;
+
 
     public PetListDto(Integer pet_id, String pet_name, String pet_tipe, String pet_age, String pet_gender, String pet_stat, String pet_care, String pet_contacts, String pet_image, Integer state, String mod_user, Date mod_date, Integer ususario_id_usuario) {
         this.pet_id = pet_id;
@@ -29,7 +30,7 @@ public class PetListDto {
         this.state = state;
         this.mod_user = mod_user;
         this.mod_date = mod_date;
-        Ususario_id_usuario = ususario_id_usuario;
+        ususario_id_usuario = ususario_id_usuario;
     }
 
     public PetListDto(String petname, String petTipe, String petAge, String petGender, String petStat, String petCare, String petContacts, String petImage) {
@@ -150,13 +151,7 @@ public class PetListDto {
         this.mod_date = mod_date;
     }
 
-    public Integer getUsusario_id_usuario() {
-        return Ususario_id_usuario;
-    }
 
-    public void setUsusario_id_usuario(Integer ususario_id_usuario) {
-        Ususario_id_usuario = ususario_id_usuario;
-    }
 
     @Override
     public String toString() {
